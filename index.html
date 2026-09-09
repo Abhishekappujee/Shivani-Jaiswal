@@ -1,0 +1,2375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Happy Birthday Shivani Jaiswal ✨ | A Special Surprise</title>
+  
+  <!-- SEO & Social Meta Tags -->
+  <meta name="description" content="A cinematic interactive birthday surprise made with love for Shivani Jaiswal by Harshvardhan Shroff.">
+  <meta property="og:title" content="Happy Birthday Shivani Jaiswal ✨">
+  <meta property="og:description" content="A special interactive birthday experience filled with blush moments, music, and love.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Outfit:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==================================================
+       DESIGN SYSTEM & CSS VARIABLES
+       ================================================== */
+    :root {
+      /* Colors */
+      --bg-dark: #0b0712;
+      --bg-gradient-start: #0b0712;
+      --bg-gradient-end: #1c0b2b;
+      
+      --color-primary: #8a3cff;
+      --color-primary-glow: rgba(138, 60, 255, 0.45);
+      --color-accent-pink: #ff4f81;
+      --color-accent-pink-glow: rgba(255, 79, 129, 0.5);
+      --color-accent-soft: #ffb6d5;
+      --color-accent-lavender: #c8b6ff;
+      --color-accent-gold: #ffd166;
+      --color-white: #ffffff;
+      
+      /* Typography */
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-cursive: 'Great Vibes', cursive;
+      
+      /* Glassmorphic Cards */
+      --glass-bg: rgba(28, 11, 43, 0.55);
+      --glass-border: rgba(255, 79, 129, 0.25);
+      --glass-shadow: 0 16px 40px 0 rgba(0, 0, 0, 0.6);
+      --glass-blur: 20px;
+
+      /* Navigation & Layout */
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Reset & Base Styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-dark);
+      color: var(--color-white);
+      font-family: var(--font-sans);
+      overflow: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      touch-action: manipulation;
+    }
+
+    /* Background Canvas */
+    #bg-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100svh;
+      z-index: 1;
+      pointer-events: none;
+      transition: background 1.5s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* Screen Flash Effect */
+    #flash-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100svh;
+      background: #ffffff;
+      opacity: 0;
+      z-index: 9999;
+      pointer-events: none;
+      transition: opacity 0.15s ease-out;
+    }
+
+    /* Scroll Container (Snapping) */
+    .scroll-container {
+      width: 100vw;
+      height: 100svh;
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      scroll-behavior: smooth;
+      position: relative;
+      z-index: 2;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .scroll-container::-webkit-scrollbar {
+      display: none;
+    }
+
+    /* ==================================================
+       TOP BAR: BLUSH METER & AUDIO CONTROLS
+       ================================================== */
+    .top-header-bar {
+      position: fixed;
+      top: calc(12px + var(--safe-top));
+      left: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    /* Blush-o-Meter Widget */
+    .blush-meter-card {
+      pointer-events: auto;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      padding: 8px 16px;
+      border-radius: 30px;
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.4s ease;
+    }
+
+    .blush-meter-card:hover {
+      border-color: var(--color-accent-pink);
+      box-shadow: 0 0 20px var(--color-accent-pink-glow);
+    }
+
+    .blush-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--color-accent-soft);
+      letter-spacing: 0.5px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .blush-bar-outer {
+      width: 90px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.12);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      position: relative;
+    }
+
+    .blush-bar-inner {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, #ff4f81, #ff7597, #ffd166);
+      border-radius: 10px;
+      transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 0 10px var(--color-accent-pink);
+    }
+
+    .blush-percent {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--color-accent-gold);
+      min-width: 38px;
+    }
+
+    /* Audio Waves floating button */
+    .audio-control {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .music-btn {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      box-shadow: var(--glass-shadow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      color: var(--color-white);
+      transition: all 0.3s ease;
+      outline: none;
+      position: relative;
+    }
+
+    .music-btn:hover {
+      transform: scale(1.08);
+      border-color: var(--color-accent-pink);
+      box-shadow: 0 0 18px var(--color-accent-pink-glow);
+    }
+
+    .music-waves {
+      display: flex;
+      align-items: flex-end;
+      gap: 3px;
+      height: 16px;
+    }
+
+    .music-waves span {
+      width: 3px;
+      height: 100%;
+      background-color: var(--color-accent-soft);
+      border-radius: 2px;
+      transform-origin: bottom;
+      transform: scaleY(0.25);
+      transition: transform 0.3s ease;
+    }
+
+    .music-btn.playing .music-waves span {
+      animation: soundwave 1.2s ease-in-out infinite alternate;
+    }
+    .music-btn.playing .music-waves span:nth-child(2) { animation-delay: 0.2s; }
+    .music-btn.playing .music-waves span:nth-child(3) { animation-delay: 0.4s; }
+    .music-btn.playing .music-waves span:nth-child(4) { animation-delay: 0.1s; }
+
+    @keyframes soundwave {
+      0% { transform: scaleY(0.2); }
+      100% { transform: scaleY(1); }
+    }
+
+    .music-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-accent-soft);
+      background: var(--glass-bg);
+      padding: 4px 10px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      display: none;
+    }
+    @media (min-width: 600px) {
+      .music-label { display: block; }
+    }
+
+    /* ==================================================
+       LOADING PRELOADER
+       ================================================== */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--bg-dark);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.8s;
+    }
+
+    .preloader.fade-out {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .preloader-heart {
+      font-size: 3.5rem;
+      animation: heartPulse 1.2s ease-in-out infinite;
+      filter: drop-shadow(0 0 15px var(--color-accent-pink));
+      margin-bottom: 1rem;
+    }
+
+    .preloader-text {
+      font-size: 1.1rem;
+      font-weight: 600;
+      letter-spacing: 2px;
+      color: var(--color-accent-soft);
+      animation: pulse 2s ease-in-out infinite;
+      text-align: center;
+      padding: 0 20px;
+    }
+
+    @keyframes heartPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.25); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; text-shadow: 0 0 10px rgba(255, 182, 213, 0.5); }
+    }
+
+    /* ==================================================
+       SIDE NAV & SCROLL INDICATORS
+       ================================================== */
+    .scene-nav {
+      position: fixed;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    .nav-dot.active {
+      background: var(--color-accent-pink);
+      border-color: var(--color-accent-pink);
+      transform: scale(1.5);
+      box-shadow: 0 0 12px var(--color-accent-pink-glow);
+    }
+
+    /* ==================================================
+       GLOBAL BUTTON & DANCING BUTTON STYLES
+       ================================================== */
+    .btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0.9rem 2.2rem;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+      color: var(--color-white);
+      background: linear-gradient(135deg, var(--color-primary), var(--color-accent-pink));
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      outline: none;
+      box-shadow: 0 8px 25px rgba(138, 60, 255, 0.35);
+      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease, background 0.3s ease;
+      text-decoration: none;
+      min-height: 48px;
+      user-select: none;
+    }
+
+    .btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 14px 35px rgba(255, 79, 129, 0.5);
+    }
+
+    .btn:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* Dancing Buttons Arcade Container */
+    .dancing-arcade {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-top: 2rem;
+      position: relative;
+      min-height: 140px;
+      width: 100%;
+      max-width: 650px;
+    }
+
+    /* Specific Button Styles */
+    .btn-dodge {
+      background: linear-gradient(135deg, #ff4f81, #ff7597);
+      box-shadow: 0 8px 25px rgba(255, 79, 129, 0.4);
+      transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+    }
+
+    .btn-blush {
+      background: linear-gradient(135deg, #8a3cff, #c8b6ff);
+      color: #fff;
+      box-shadow: 0 8px 25px rgba(138, 60, 255, 0.4);
+    }
+
+    .btn-party {
+      background: linear-gradient(135deg, #ffd166, #ff7597);
+      color: #0b0712;
+      font-weight: 800;
+      box-shadow: 0 8px 25px rgba(255, 209, 102, 0.4);
+    }
+
+    /* Dancing Keyframes */
+    .btn-wiggle {
+      animation: wiggleDance 0.8s ease-in-out infinite alternate;
+    }
+
+    .btn-bounce {
+      animation: bounceDance 0.7s cubic-bezier(0.28, 0.84, 0.42, 1) infinite alternate;
+    }
+
+    .btn-spin-once {
+      animation: spinDance 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes wiggleDance {
+      0% { transform: rotate(-5deg) scale(1); }
+      50% { transform: rotate(5deg) scale(1.05); }
+      100% { transform: rotate(-5deg) scale(1); }
+    }
+
+    @keyframes bounceDance {
+      0% { transform: translateY(0) scale(1); }
+      100% { transform: translateY(-12px) scale(1.06); }
+    }
+
+    @keyframes spinDance {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.15); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Speech Bubble over Dodging Button */
+    .speech-bubble {
+      position: absolute;
+      background: linear-gradient(135deg, var(--color-accent-pink), var(--color-primary));
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      bottom: calc(100% + 12px);
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      transform-origin: bottom center;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 0 6px 20px rgba(255, 79, 129, 0.4);
+      z-index: 20;
+      white-space: nowrap;
+      pointer-events: none;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .speech-bubble.show {
+      transform: translateX(-50%) scale(1);
+    }
+
+    .speech-bubble::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 6px;
+      border-style: solid;
+      border-color: var(--color-accent-pink) transparent transparent transparent;
+    }
+
+    /* Toast Notification Banner */
+    .toast-banner {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(28, 11, 43, 0.9);
+      border: 1px solid var(--color-accent-pink);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 10px 30px rgba(255, 79, 129, 0.4);
+      z-index: 1000;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      pointer-events: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .toast-banner.show {
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Glowing letters for title */
+    .hover-glow-letter {
+      display: inline-block;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .hover-glow-letter:hover {
+      transform: scale(1.3) translateY(-6px) rotate(6deg);
+      color: var(--color-accent-gold);
+      text-shadow: 0 0 15px var(--color-accent-gold);
+    }
+
+    /* Secret interaction hints */
+    .secrets-hint {
+      font-size: 0.85rem;
+      color: rgba(200, 182, 255, 0.6);
+      margin-top: 1.5rem;
+      font-style: italic;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .secrets-hint:hover {
+      color: var(--color-accent-soft);
+      text-shadow: 0 0 10px rgba(255, 182, 213, 0.6);
+    }
+
+    .secret-popup-text {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--color-accent-gold);
+      min-height: 24px;
+      margin-top: 0.5rem;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .secret-popup-text.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================================================
+       SCENES & LAYOUT STRUCTURE
+       ================================================== */
+    .scene {
+      width: 100vw;
+      height: 100svh;
+      scroll-snap-align: start;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: calc(60px + var(--safe-top)) 20px calc(40px + var(--safe-bottom));
+      position: relative;
+      text-align: center;
+      box-sizing: border-box;
+    }
+
+    /* Fade reveal animation */
+    .fade-reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1s cubic-bezier(0.25, 1, 0.5, 1), transform 1s cubic-bezier(0.25, 1, 0.5, 1);
+      width: 100%;
+      max-width: 800px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .fade-reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Scene 1 Typography */
+    .s1-tag {
+      font-size: 0.95rem;
+      letter-spacing: 2px;
+      color: var(--color-accent-soft);
+      text-transform: uppercase;
+      margin-bottom: 0.8rem;
+      font-weight: 600;
+    }
+
+    .s1-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.15;
+      background: linear-gradient(135deg, #ffffff 30%, var(--color-accent-soft) 70%, var(--color-accent-pink) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.8rem;
+    }
+
+    .s1-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: rgba(255, 255, 255, 0.8);
+      max-width: 550px;
+      font-weight: 300;
+      margin-bottom: 1.2rem;
+    }
+
+    /* Scene 2 Reveal Step Styling */
+    .reveal-container {
+      position: relative;
+      width: 100%;
+      max-width: 700px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .reveal-step {
+      position: absolute;
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-weight: 700;
+      text-align: center;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none;
+      width: 100%;
+    }
+
+    .reveal-step.visible {
+      opacity: 1;
+      transform: scale(1);
+      pointer-events: auto;
+    }
+
+    .birthday-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .highlight-name {
+      background: linear-gradient(135deg, #ff4f81, #ffd166, #ff7597);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-family: var(--font-cursive);
+      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      display: block;
+      margin-top: 0.2rem;
+      filter: drop-shadow(0 0 20px var(--color-accent-pink-glow));
+    }
+
+    /* Scene 3: Secret Compliment Cards Grid & Letter */
+    .cards-grid-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 4vw, 2.5rem);
+      margin-bottom: 0.4rem;
+      background: linear-gradient(135deg, #fff, var(--color-accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .cards-grid-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-accent-lavender);
+      margin-bottom: 1.5rem;
+    }
+
+    .compliment-cards-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      width: 100%;
+      max-width: 780px;
+      margin-bottom: 1.8rem;
+    }
+
+    /* Flip Card 3D */
+    .flip-card {
+      background-color: transparent;
+      height: 140px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+      border-radius: 20px;
+      box-shadow: var(--glass-shadow);
+    }
+
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flip-card-front, .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+    }
+
+    .flip-card-front {
+      background: var(--glass-bg);
+      color: var(--color-white);
+    }
+
+    .flip-card-front .card-icon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .flip-card-front .card-prompt {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--color-accent-soft);
+    }
+
+    .flip-card-front .card-tap-hint {
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 4px;
+    }
+
+    .flip-card-back {
+      background: linear-gradient(135deg, rgba(138, 60, 255, 0.7), rgba(255, 79, 129, 0.7));
+      color: white;
+      transform: rotateY(180deg);
+      border-color: var(--color-accent-gold);
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    /* Typewriter Romantic Message Card */
+    .message-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      -webkit-backdrop-filter: blur(var(--glass-blur));
+      border-radius: 28px;
+      padding: 2.2rem;
+      box-shadow: var(--glass-shadow);
+      width: 100%;
+      max-width: 680px;
+      max-height: 60vh;
+      overflow-y: auto;
+      text-align: left;
+      position: relative;
+    }
+
+    .message-title {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      color: var(--color-accent-soft);
+      text-align: center;
+    }
+
+    .message-text {
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.92);
+      font-weight: 400;
+      white-space: pre-line;
+    }
+
+    .btn-message-next {
+      margin-top: 1.5rem;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      align-self: center;
+    }
+
+    .btn-message-next.visible {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Scene 4: Photo Gallery Carousel */
+    .gallery-container {
+      width: 100%;
+      max-width: 900px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .gallery-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 0.3rem;
+      background: linear-gradient(135deg, #fff, var(--color-accent-soft));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gallery-subtitle {
+      font-size: 0.9rem;
+      color: var(--color-accent-lavender);
+      margin-bottom: 1.5rem;
+    }
+
+    .gallery-track-wrapper {
+      width: 100%;
+      overflow: hidden;
+      padding: 10px 0 25px;
+    }
+
+    .gallery-track {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      padding: 0 20px;
+    }
+
+    .gallery-track::-webkit-scrollbar {
+      display: none;
+    }
+
+    .gallery-card {
+      flex: 0 0 280px;
+      scroll-snap-align: center;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: var(--glass-shadow);
+      transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+    .gallery-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      border-color: var(--color-accent-pink);
+    }
+
+    .card-img-wrapper {
+      width: 100%;
+      height: 320px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .card-img-wrapper img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+    }
+
+    .gallery-card:hover .card-img-wrapper img {
+      transform: scale(1.08);
+    }
+
+    .card-content {
+      padding: 1rem;
+      text-align: center;
+    }
+
+    .card-caption {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 4px;
+    }
+
+    .card-date {
+      font-size: 0.8rem;
+      color: var(--color-accent-soft);
+    }
+
+    .gallery-dots {
+      display: flex;
+      gap: 8px;
+      margin: 1rem 0;
+    }
+
+    .gallery-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+    }
+
+    .gallery-dot.active {
+      background: var(--color-accent-pink);
+      width: 24px;
+      border-radius: 10px;
+    }
+
+    /* Scene 5: Interactive Heart Moment */
+    .heart-scene-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      margin-bottom: 1.5rem;
+      color: #fff;
+    }
+
+    .heart-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+
+    .pulsing-glow {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--color-accent-pink) 0%, transparent 70%);
+      opacity: 0.6;
+      animation: pulseGlow 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.5); opacity: 0.8; }
+    }
+
+    .heart-svg {
+      width: 100px;
+      height: 100px;
+      fill: url(#heartGradient);
+      filter: drop-shadow(0 0 20px var(--color-accent-pink));
+      animation: heartBeat 1.2s ease-in-out infinite;
+      transition: transform 0.3s ease;
+    }
+
+    .heart-wrapper:hover .heart-svg {
+      transform: scale(1.15);
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      15% { transform: scale(1.18); }
+      30% { transform: scale(1); }
+      45% { transform: scale(1.12); }
+    }
+
+    .heart-instruction {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--color-accent-soft);
+      letter-spacing: 1px;
+      animation: pulse 2s infinite;
+    }
+
+    .heart-reward-card {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(var(--glass-blur));
+      border-radius: 28px;
+      padding: 2.2rem;
+      box-shadow: var(--glass-shadow);
+      max-width: 550px;
+      animation: rewardPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .heart-reward-card.show {
+      display: flex;
+    }
+
+    @keyframes rewardPop {
+      0% { transform: scale(0.7); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .reward-text-1 {
+      font-family: var(--font-serif);
+      font-size: 1.6rem;
+      color: #fff;
+      margin-bottom: 0.8rem;
+    }
+
+    .reward-text-2 {
+      font-size: 1.05rem;
+      color: var(--color-accent-soft);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Scene 6: Final Grand Surprise */
+    .s6-mandala-container {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 450px;
+      height: 450px;
+      pointer-events: none;
+      opacity: 0.25;
+      animation: rotateMandala 60s linear infinite;
+    }
+
+    .s6-mandala-container stroke {
+      stroke: var(--color-accent-pink);
+    }
+
+    @keyframes rotateMandala {
+      to { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    .s6-content {
+      position: relative;
+      z-index: 10;
+      max-width: 650px;
+    }
+
+    .s6-title {
+      font-family: var(--font-serif);
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      margin-bottom: 1.2rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .s6-message {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1.5rem;
+      white-space: pre-line;
+    }
+
+    .s6-stay {
+      font-family: var(--font-cursive);
+      font-size: 2.8rem;
+      color: var(--color-accent-gold);
+      margin-bottom: 1.8rem;
+    }
+
+    .s6-footer {
+      font-size: 0.85rem;
+      color: rgba(255, 255, 255, 0.6);
+      letter-spacing: 1px;
+    }
+
+    /* High contrast / reduced motion support */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Canvas background for floating particles, stars, emojis & petals -->
+  <canvas id="bg-canvas"></canvas>
+
+  <!-- White Screen Flash overlay for tap moments -->
+  <div id="flash-overlay"></div>
+
+  <!-- Toast Notification Banner -->
+  <div class="toast-banner" id="toastBanner">
+    <span id="toastIcon">😳</span>
+    <span id="toastText">Shivani is blushing! 💕</span>
+  </div>
+
+  <!-- TOP HEADER BAR: BLUSH METER & AUDIO CONTROLS -->
+  <header class="top-header-bar">
+    <!-- Shivani's Blush-O-Meter -->
+    <div class="blush-meter-card" id="blushMeterCard" title="Interact with buttons & secret cards to fill the Blush Meter!">
+      <div class="blush-title">
+        <span>Shivani's Blush Meter</span> 😳
+      </div>
+      <div class="blush-bar-outer">
+        <div class="blush-bar-inner" id="blushBarInner"></div>
+      </div>
+      <div class="blush-percent" id="blushPercent">0%</div>
+    </div>
+
+    <!-- Music Control Widget -->
+    <div class="audio-control">
+      <span class="music-label" id="musicLabel">Happy Birthday Tune 🎵</span>
+      <button class="music-btn" id="musicBtn" aria-label="Toggle Happy Birthday Music" title="Play / Pause Happy Birthday Music">
+        <div class="music-waves" id="musicWaves">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </button>
+    </div>
+  </header>
+
+  <!-- Side Navigation Dots -->
+  <nav class="scene-nav" id="sceneNav">
+    <div class="nav-dot active" data-scene="1" title="Scene 1: Mysterious Opening"></div>
+    <div class="nav-dot" data-scene="2" title="Scene 2: Birthday Reveal"></div>
+    <div class="nav-dot" data-scene="3" title="Scene 3: Secret Messages"></div>
+    <div class="nav-dot" data-scene="4" title="Scene 4: Photo Gallery"></div>
+    <div class="nav-dot" data-scene="5" title="Scene 5: Interactive Heart"></div>
+    <div class="nav-dot" data-scene="6" title="Scene 6: Final Wishes"></div>
+  </nav>
+
+  <!-- Loading Preloader Screen -->
+  <div class="preloader" id="preloader" role="status">
+    <div class="preloader-heart">💖</div>
+    <div class="preloader-text">Preparing a special surprise for Shivani Jaiswal... ✨</div>
+  </div>
+
+  <!-- Main Scroll Snap Sections -->
+  <main class="scroll-container" id="scrollContainer">
+
+    <!-- ==================================================
+         SCENE 1: THE MYSTERIOUS OPENING & DANCING BUTTONS
+         ================================================== -->
+    <section class="scene" id="scene-1">
+      <div class="fade-reveal active">
+        <p class="s1-tag" id="s1Tag" style="cursor: pointer;" title="Tap for a secret mystery...">Tap here for a secret... 🔮</p>
+        <div id="secretTagPopup" class="secret-popup-text"></div>
+        
+        <h1 class="s1-title" id="s1Title">Hey, Shivani Jaiswal ✨</h1>
+        <p class="s1-sub" id="s1Sub">I made a small playful surprise just for you. Get ready to blush! 💖</p>
+
+        <!-- Initial Dancing Buttons Arcade -->
+        <div class="dancing-arcade" id="dancingArcade">
+          <!-- Speech Bubble for runaway button -->
+          <div class="speech-bubble" id="dodgeSpeechBubble">Catch me if you can! 🙈</div>
+          
+          <!-- Runaway Dodging Button -->
+          <button class="btn btn-dodge" id="dodgeBtn">
+            <span>Catch Me If You Can! 🙈</span>
+          </button>
+          
+          <!-- Blush Spawner Button -->
+          <button class="btn btn-blush" id="blushBtn">
+            <span>Make Shivani Blush 😳💖</span>
+          </button>
+          
+          <!-- Dance Party Button -->
+          <button class="btn btn-party" id="dancePartyBtn">
+            <span>Dance Party Mode 💃🎶</span>
+          </button>
+        </div>
+
+        <p class="secrets-hint" id="secretsHint">Tap on letters in your name or buttons to make blushing emojis float! 🌸</p>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         SCENE 2: THE CINEMATIC BIRTHDAY REVEAL
+         ================================================== -->
+    <section class="scene" id="scene-2">
+      <div class="reveal-container">
+        <div class="reveal-step step-1">Wait...</div>
+        <div class="reveal-step step-2">Today is dedicated to someone really special...</div>
+        <div class="reveal-step step-3">
+          <h2 class="birthday-title" id="bdayTitle">
+            Happy Birthday<br>
+            <span class="highlight-name">Shivani Jaiswal</span> 🎂🎉
+          </h2>
+          <button class="btn" id="revealMoreBtn">There's more for you ✨</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         SCENE 3: SECRET COMPLIMENT CARDS & ROMANTIC LETTER
+         ================================================== -->
+    <section class="scene" id="scene-3">
+      <div class="fade-reveal">
+        <h2 class="cards-grid-title">Secret Blush Cards 💌</h2>
+        <p class="cards-grid-subtitle">Tap each card to flip and reveal a secret compliment!</p>
+        
+        <!-- 4 Interactive 3D Flip Cards -->
+        <div class="compliment-cards-container">
+          <div class="flip-card" data-card="1">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-icon">👀</span>
+                <span class="card-prompt">Dangerous Eyelashes</span>
+                <span class="card-tap-hint">(Tap to Flip)</span>
+              </div>
+              <div class="flip-card-back">
+                “Caution: May cause sudden loss of focus.” 😂 Your flickering eyelashes genuinely feel like a blower pointed at my face! 🫠❤️
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" data-card="2">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-icon">🔬</span>
+                <span class="card-prompt">Daily Research</span>
+                <span class="card-tap-hint">(Tap to Flip)</span>
+              </div>
+              <div class="flip-card-back">
+                I was trying to figure out if I was coming to work out or just to conduct daily research on your face! 😂 Kasam se cute to tum bahut ho! 🫣
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" data-card="3">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-icon">✨</span>
+                <span class="card-prompt">24-Carat Gold</span>
+                <span class="card-tap-hint">(Tap to Flip)</span>
+              </div>
+              <div class="flip-card-back">
+                You feel genuinely pure and real to me... like 24-carat gold! ✨ (Though much harder to keep safe because you steal all attention!) 👑💖
+              </div>
+            </div>
+          </div>
+
+          <div class="flip-card" data-card="4">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="card-icon">🥳</span>
+                <span class="card-prompt">The Golden Rule</span>
+                <span class="card-tap-hint">(Tap to Flip)</span>
+              </div>
+              <div class="flip-card-back">
+                Before you start overthinking this entire story... Happy Birthday first! Questions later. 😂🎂❤️
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Typewriter Letter Card -->
+        <div class="message-card" id="scene3Card">
+          <h2 class="message-title">A Message for Shivani Jaiswal ✨</h2>
+          <div class="message-text" id="typewriterText"></div>
+          <button class="btn btn-message-next" id="messageNextBtn">Keep going 💕</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         SCENE 4: MEMORY PHOTO GALLERY
+         ================================================== -->
+    <section class="scene" id="scene-4">
+      <div class="gallery-container fade-reveal" id="scene4Gallery">
+        <h2 class="gallery-title">Memories & Smiles</h2>
+        <p class="gallery-subtitle">A collection of sweet moments created for you ✨</p>
+        
+        <div class="gallery-track-wrapper">
+          <div class="gallery-track" id="galleryTrack">
+            <!-- Cards populated dynamically via JavaScript -->
+          </div>
+        </div>
+
+        <div class="gallery-dots" id="galleryDots">
+          <!-- Dots populated dynamically -->
+        </div>
+
+        <button class="btn" id="galleryNextBtn">Keep going ✨</button>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         SCENE 5: INTERACTIVE HEART MOMENT
+         ================================================== -->
+    <section class="scene" id="scene-5">
+      <div class="fade-reveal active" id="heartPrompt">
+        <h2 class="heart-scene-title">Okay Shivani... one last gesture.</h2>
+        <div class="heart-wrapper" id="heartWrapper" title="Tap the heart to unleash blushing love!">
+          <div class="pulsing-glow"></div>
+          <svg class="heart-svg" viewBox="0 0 24 24">
+            <defs>
+              <linearGradient id="heartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ff4f81" />
+                <stop offset="100%" stop-color="#ff1a5c" />
+              </linearGradient>
+            </defs>
+            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+          </svg>
+        </div>
+        <p class="heart-instruction">Tap the heart ❤️</p>
+      </div>
+
+      <!-- Reward Card Revealed on Tap -->
+      <div class="heart-reward-card" id="heartRewardCard">
+        <h2 class="reward-text-1">You deserve all the happiness in the world, Shivani!</h2>
+        <p class="reward-text-2">And maybe... a lot of reasons to smile and blush today. 💕</p>
+        <button class="btn" id="rewardNextBtn">Final Surprise 💖</button>
+      </div>
+    </section>
+
+    <!-- ==================================================
+         SCENE 6: FINAL SURPRISE & GRAND WISHES
+         ================================================== -->
+    <section class="scene" id="scene-6">
+      <div class="s6-mandala-container" aria-hidden="true">
+        <svg viewBox="0 0 100 100" fill="none" stroke-width="0.3" stroke="#ff4f81">
+          <circle cx="50" cy="50" r="30" />
+          <circle cx="50" cy="35" r="30" />
+          <circle cx="50" cy="65" r="30" />
+          <circle cx="35" cy="50" r="30" />
+          <circle cx="65" cy="50" r="30" />
+          <circle cx="39.4" cy="39.4" r="30" />
+          <circle cx="60.6" cy="60.6" r="30" />
+          <circle cx="39.4" cy="60.6" r="30" />
+          <circle cx="60.6" cy="39.4" r="30" />
+        </svg>
+      </div>
+      
+      <div class="s6-content fade-reveal" id="scene6Content">
+        <h2 class="s6-title" id="s6Title">
+          Happy Birthday,<br>Shivani Jaiswal ❤️
+        </h2>
+        <p class="s6-message" id="s6Message">
+          May this year bring you endless happiness, unexpected joy, and countless reasons to smile.
+        </p>
+        <p class="s6-stay">Stay amazing always. ✨</p>
+        <p class="s6-footer">Made with ❤️ just for Shivani by Harshvardhan Shroff</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================================================
+       JAVASCRIPT LOGIC & ANIMATION CONTROLLER
+       ================================================== -->
+  <script>
+    /* ==================================================
+       1. DATA CONFIGURATION FOR SHIVANI JAISWAL
+       ================================================== */
+    const birthdayData = {
+      landingName: "Shivani Jaiswal",
+      revealName: "Shivani Jaiswal",
+      finalName: "Shivani Jaiswal",
+      
+      introText: "A playful & romantic birthday surprise...",
+      introSubtext: "Made with love for the most special girl.",
+      
+      birthdayMessage: `Happy Birthday, Shivani🥳🎂❤️
+
+Since it’s your birthday, I thought maybe this is the right day to finally tell you a story that I’ve been carrying around for quite some time. 😅
+
+The first time I saw you working out with a guy— Aman Shukla who I guess was your friend—you were doing overhead skull crushers.
+
+My first thought was, “Chhoro, hogi koi.” 😂😂
+
+Then the next day, I saw you again with him and, after looking at you for a moment, I abruptly said to myself:
+
+“Bro… I’m done.” 😂😂
+
+Because honestly, Shivani… you are damn cute. 🫠❤️
+
+And your eyelashes… I don’t know what kind of unfair advantage you were born with, but they are beautiful. 😂 Your sparkling eyes kept forcing me to look at you again and again.
+
+At one point, I was genuinely trying to figure out whether I was coming to the gym to work out or just to conduct daily research on your face. 😂
+
+Trust me, the more I tried to hide it, the more I failed at avoiding you hehehe yarr kasam se cute to tum bahut ho 🫣🫣
+
+And the way your eyelashes flicker… it genuinely feels like someone is standing in front of me with a blower pointed straight at my face. 😂😂
+
+Honestly, those eyelashes deserve their own warning label:
+
+“Caution: May cause sudden loss of focus.” 😂❤️
+
+Gradually, I started talking to you. I started coming closer, trying to know you better, understand you better and figure out what kind of person you actually are.
+
+And the funniest part?
+
+Aaj tak koshish hi kar raha hoon. 😂😂
+
+But honestly, I’ll keep doing my level best to master this art. 😌❤️
+
+Although, I must admit, you are not exactly making it easy. Every time I think I’ve understood you, you do something cute and my entire analysis report gets rejected. 😂
+
+Now you might be wondering:
+
+“Wait… how can this guy be so romantically attracted to me when, at one point, he was literally insisting that I should give his friend Abhishek a chance?” 😂
+
+Well… your confusion would be completely valid.
+
+So let me explain.
+
+Yes, Abhishek did like you. When he was in Bangalore, we used to discuss you, and he once mentioned that you reminded him of someone he had loved in his life.
+
+That made me think, “If this girl reminds him of someone he once loved, then maybe he should be given a chance with her.”
+
+And honestly, until the day I admitted what I felt, I was pretty much convinced that I would never try anything with you because Abhishek already liked you.
+
+In fact, I deliberately tried to notice only your negative points.
+
+Because I knew myself.
+
+Agar positive points dekhne lagta, toh shayad aur zyada attract ho jaata. 😂
+
+So I used to exaggerate your negative sides, and sometimes that even became a reason for us to fight. Somewhere, I was intentionally creating those little gaps because I thought that would make things easier for me.
+
+Spoiler alert: it didn’t. 😂🤦🏻‍♂️
+
+In fact, my plan was so unsuccessful that even my own brain eventually said, “Bhai, bas kar. Tu already phas chuka hai.” 😂
+
+When I eventually discussed everything with Abhishek, he understood what was happening and told me that I should stop holding myself back and give myself a genuine chance.
+
+He basically made me realise that if I didn’t give it my 100%, I might eventually regret not trying.
+
+And because Abhishek and I share a strong bond and genuinely trust each other, there was no competition or bitterness between us. We talked about it openly, understood each other and supported each other like we always have.
+
+But somewhere along the way, something completely unexpected happened.
+
+The more time you and I spent together, the more I started feeling that whatever we had was becoming something genuinely special.
+
+It wasn’t just attraction anymore.
+
+It was the conversations.
+
+The comfort.
+
+The little things.
+
+The way I started understanding you.
+
+And somehow, without even realising it, your presence started becoming something I genuinely looked forward to. ❤️
+
+You became the kind of person whose message could instantly improve my mood—and whose late replies could make me check my phone like I was waiting for exam results and sometimes I do delete those msgs which makes you irritate little bit too 😂
+
+I don’t know how you see our bond.
+
+I don’t know what place I hold in your life.
+
+And honestly, I’m not writing this expecting anything from you.
+
+I just wanted you to know what you gradually became to me.
+
+I genuinely admire you, Shivani.
+
+Not just because you’re cute.
+
+Not just because of your sparkling eyes.
+
+And definitely not just because of those dangerous eyelashes. 😂❤️
+
+I admire you because you feel genuinely pure and real to me.
+
+Like 24-carat gold. ✨
+
+Although, unlike gold, you are much more difficult to keep safe because you keep stealing attention everywhere you go. 😂
+
+And maybe that’s what attracted me the most.
+
+Because while I was trying so hard not to fall for you…
+
+I somehow ended up falling anyway. 😂❤️
+
+So, on your birthday, I just want to wish you the happiest birthday, Shivani! 🥳🎂❤️
+
+I hope this year brings you everything you genuinely deserve—happiness, peace, success, beautiful memories and lots of reasons to smile. ✨
+
+Keep being the person you are, because honestly, there is something very special about you that I don’t think even you realise.
+
+And thank you for unknowingly becoming such a beautiful part of my life. ❤️
+
+Also, please don’t let this message make you too proud. You’re already cute enough; if your attitude increases too, I’ll have to start maintaining a safe distance. 😂❤️
+
+Once again, Happy Birthday, Jais! 🎂🥳❤️
+
+And yes… before you start overthinking this entire message—
+
+Happy Birthday first. Questions later. 😂❤️`,
+
+      photos: [
+        {
+          url: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=800&q=80",
+          caption: "A magical smile ✨",
+          date: "Cherished Moment"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=800&q=80",
+          caption: "Simply breathtaking 💕",
+          date: "Lovely Memories"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1502082553048-f009c37129b9?auto=format&fit=crop&w=800&q=80",
+          caption: "Unforgettable vibes 🌸",
+          date: "Special Times"
+        },
+        {
+          url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80",
+          caption: "Forever shining ❤️",
+          date: "Always in mind"
+        }
+      ],
+
+      finalMessage: "May this new chapter of your life be filled with radiant health, pure joy, endless love, and all the success in the world."
+    };
+
+    /* ==================================================
+       2. WEB AUDIO API SYNTHESIZER FOR HAPPY BIRTHDAY
+       ================================================== */
+    class HappyBirthdaySynth {
+      constructor() {
+        this.audioCtx = null;
+        this.isPlaying = false;
+        this.timer = null;
+      }
+
+      init() {
+        if (!this.audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          this.audioCtx = new AudioContext();
+        }
+        if (this.audioCtx.state === 'suspended') {
+          this.audioCtx.resume();
+        }
+      }
+
+      playTone(freq, type, duration, delay, gainLevel = 0.25) {
+        if (!this.audioCtx) return;
+        const startTime = this.audioCtx.currentTime + delay;
+        const osc = this.audioCtx.createOscillator();
+        const gain = this.audioCtx.createGain();
+
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, startTime);
+
+        gain.gain.setValueAtTime(0.001, startTime);
+        gain.gain.exponentialRampToValueAtTime(gainLevel, startTime + 0.04);
+        gain.gain.exponentialRampToValueAtTime(0.001, startTime + duration);
+
+        osc.connect(gain);
+        gain.connect(this.audioCtx.destination);
+
+        osc.start(startTime);
+        osc.stop(startTime + duration);
+      }
+
+      playChime() {
+        this.init();
+        this.playTone(523.25, 'sine', 0.4, 0, 0.2);     // C5
+        this.playTone(659.25, 'sine', 0.4, 0.08, 0.2);  // E5
+        this.playTone(783.99, 'sine', 0.4, 0.16, 0.2);  // G5
+        this.playTone(1046.50, 'sine', 0.6, 0.24, 0.25); // C6
+      }
+
+      play() {
+        this.init();
+        if (this.isPlaying) return;
+        this.isPlaying = true;
+
+        const notes = [
+          { note: 261.63, duration: 0.35, delay: 0 },    // C4
+          { note: 261.63, duration: 0.35, delay: 0.4 },  // C4
+          { note: 293.66, duration: 0.7,  delay: 0.8 },  // D4
+          { note: 261.63, duration: 0.7,  delay: 1.6 },  // C4
+          { note: 349.23, duration: 0.7,  delay: 2.4 },  // F4
+          { note: 329.63, duration: 1.2,  delay: 3.2 },  // E4
+
+          { note: 261.63, duration: 0.35, delay: 4.6 },  // C4
+          { note: 261.63, duration: 0.35, delay: 5.0 },  // C4
+          { note: 293.66, duration: 0.7,  delay: 5.4 },  // D4
+          { note: 261.63, duration: 0.7,  delay: 6.2 },  // C4
+          { note: 392.00, duration: 0.7,  delay: 7.0 },  // G4
+          { note: 349.23, duration: 1.2,  delay: 7.8 },  // F4
+
+          { note: 261.63, duration: 0.35, delay: 9.2 },  // C4
+          { note: 261.63, duration: 0.35, delay: 9.6 },  // C4
+          { note: 523.25, duration: 0.7,  delay: 10.0 }, // C5
+          { note: 440.00, duration: 0.7,  delay: 10.8 }, // A4
+          { note: 349.23, duration: 0.7,  delay: 11.6 }, // F4
+          { note: 329.63, duration: 0.7,  delay: 12.4 }, // E4
+          { note: 293.66, duration: 1.0,  delay: 13.2 }, // D4
+
+          { note: 466.16, duration: 0.35, delay: 14.4 }, // Bb4
+          { note: 466.16, duration: 0.35, delay: 14.8 }, // Bb4
+          { note: 440.00, duration: 0.7,  delay: 15.2 }, // A4
+          { note: 349.23, duration: 0.7,  delay: 16.0 }, // F4
+          { note: 392.00, duration: 0.7,  delay: 16.8 }, // G4
+          { note: 349.23, duration: 1.5,  delay: 17.6 }  // F4
+        ];
+
+        const loopDuration = 20.0;
+
+        const playCycle = () => {
+          if (!this.isPlaying) return;
+          notes.forEach(n => {
+            this.playTone(n.note, 'triangle', n.duration, n.delay, 0.2);
+            this.playTone(n.note * 0.5, 'sine', n.duration * 0.9, n.delay, 0.1);
+          });
+
+          this.timer = setTimeout(() => {
+            if (this.isPlaying) playCycle();
+          }, loopDuration * 1000);
+        };
+
+        playCycle();
+      }
+
+      stop() {
+        this.isPlaying = false;
+        if (this.timer) clearTimeout(this.timer);
+      }
+    }
+
+    /* ==================================================
+       3. CANVAS PARTICLE SYSTEM WITH BLUSH EMOJIS & PETALS
+       ================================================== */
+    class Particle {
+      constructor(canvas, options = {}) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.x = options.x ?? Math.random() * canvas.width;
+        this.y = options.y ?? Math.random() * canvas.height;
+        this.size = options.size ?? Math.random() * 2 + 1;
+        this.vx = options.vx ?? (Math.random() - 0.5) * 0.4;
+        this.vy = options.vy ?? (Math.random() - 0.5) * 0.4;
+        this.color = options.color ?? '#ffffff';
+        this.opacity = options.opacity ?? Math.random();
+        this.decay = options.decay ?? 0;
+        this.type = options.type ?? 'star';
+        this.char = options.char ?? '😳';
+        this.rotation = options.rotation ?? Math.random() * Math.PI * 2;
+        this.rotationSpeed = options.rotationSpeed ?? (Math.random() - 0.5) * 0.05;
+        this.gravity = options.gravity ?? 0;
+        this.wobble = options.wobble ?? false;
+        this.wobbleSpeed = options.wobbleSpeed ?? Math.random() * 0.05;
+        this.wobbleVal = Math.random() * 100;
+      }
+
+      update() {
+        this.vy += this.gravity;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.rotation += this.rotationSpeed;
+        this.opacity -= this.decay;
+
+        if (this.wobble) {
+          this.wobbleVal += this.wobbleSpeed;
+          this.x += Math.sin(this.wobbleVal) * 0.4;
+        }
+
+        if (this.type === 'star') {
+          this.opacity += (Math.random() - 0.5) * 0.02;
+          if (this.opacity < 0.1) this.opacity = 0.1;
+          if (this.opacity > 0.9) this.opacity = 0.9;
+        }
+      }
+
+      draw() {
+        this.ctx.save();
+        this.ctx.globalAlpha = Math.max(0, this.opacity);
+        this.ctx.fillStyle = this.color;
+        this.ctx.strokeStyle = this.color;
+
+        if (this.type === 'star') {
+          this.ctx.beginPath();
+          this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          this.ctx.fill();
+        } else if (this.type === 'emoji') {
+          this.ctx.translate(this.x, this.y);
+          this.ctx.rotate(this.rotation);
+          this.ctx.font = `${this.size}px sans-serif`;
+          this.ctx.textAlign = 'center';
+          this.ctx.textBaseline = 'middle';
+          this.ctx.fillText(this.char, 0, 0);
+        } else if (this.type === 'orb') {
+          const grad = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+          grad.addColorStop(0, this.color);
+          grad.addColorStop(1, 'transparent');
+          this.ctx.fillStyle = grad;
+          this.ctx.beginPath();
+          this.ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+          this.ctx.fill();
+        } else if (this.type === 'confetti') {
+          this.ctx.translate(this.x, this.y);
+          this.ctx.rotate(this.rotation);
+          this.ctx.fillRect(-this.size, -this.size / 2, this.size * 2, this.size);
+        } else if (this.type === 'heart') {
+          this.ctx.translate(this.x, this.y);
+          this.ctx.rotate(this.rotation);
+          this.ctx.beginPath();
+          const s = this.size;
+          this.ctx.moveTo(0, s / 4);
+          this.ctx.bezierCurveTo(0, -s / 2, -s, -s / 2, -s, s / 4);
+          this.ctx.bezierCurveTo(-s, s, 0, s * 1.5, 0, s * 1.8);
+          this.ctx.bezierCurveTo(0, s * 1.5, s, s, s, s / 4);
+          this.ctx.bezierCurveTo(s, -s / 2, 0, -s / 2, 0, s / 4);
+          this.ctx.closePath();
+          this.ctx.fill();
+        } else if (this.type === 'petal') {
+          this.ctx.translate(this.x, this.y);
+          this.ctx.rotate(this.rotation);
+          this.ctx.beginPath();
+          const w = this.size;
+          const h = this.size * 1.5;
+          this.ctx.moveTo(0, -h / 2);
+          this.ctx.quadraticCurveTo(w, -h / 2, w / 2, h / 2);
+          this.ctx.quadraticCurveTo(0, h, -w / 2, h / 2);
+          this.ctx.quadraticCurveTo(-w, -h / 2, 0, -h / 2);
+          this.ctx.closePath();
+          this.ctx.fill();
+        }
+
+        this.ctx.restore();
+      }
+    }
+
+    class ParticleSystem {
+      constructor(canvas) {
+        this.canvas = canvas;
+        this.ctx = canvas.getContext('2d');
+        this.particles = [];
+        this.ambientMode = 'default';
+        this.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        
+        this.colors = {
+          pink: ['#ff4f81', '#ffb6d5', '#ff1a5c'],
+          purple: ['#8a3cff', '#c8b6ff', '#8e62ff'],
+          gold: ['#ffd166', '#ffc13b', '#ffe29a'],
+          white: ['#ffffff', '#f0f0ff']
+        };
+
+        window.addEventListener('resize', () => this.resize());
+        this.resize();
+        this.initAmbient();
+        this.loop();
+      }
+
+      resize() {
+        this.canvas.width = window.innerWidth;
+        this.canvas.height = window.innerHeight;
+      }
+
+      initAmbient() {
+        if (this.reducedMotion) return;
+        this.particles = [];
+        const starCount = Math.floor((this.canvas.width * this.canvas.height) / 12000);
+        for (let i = 0; i < starCount; i++) {
+          this.particles.push(new Particle(this.canvas, {
+            type: 'star',
+            size: Math.random() * 1.8 + 0.3,
+            color: '#ffffff'
+          }));
+        }
+
+        const orbCount = Math.floor((this.canvas.width * this.canvas.height) / 80000);
+        for (let i = 0; i < orbCount; i++) {
+          this.particles.push(new Particle(this.canvas, {
+            type: 'orb',
+            size: Math.random() * 90 + 40,
+            vx: (Math.random() - 0.5) * 0.15,
+            vy: (Math.random() - 0.5) * 0.15,
+            color: Math.random() > 0.5 ? this.colors.pink[0] : this.colors.purple[0]
+          }));
+        }
+      }
+
+      setAmbientMode(mode) {
+        if (this.reducedMotion) return;
+        this.ambientMode = mode;
+      }
+
+      spawnBlushEmojis(x, y, count = 12) {
+        if (this.reducedMotion) return;
+        const blushSet = ['😳', '🥰', '🙈', '🥺', '💖', '🌸', '✨', '🌹', '😍', '🎂'];
+        const startX = x || this.canvas.width / 2;
+        const startY = y || this.canvas.height / 2;
+
+        for (let i = 0; i < count; i++) {
+          const char = blushSet[Math.floor(Math.random() * blushSet.length)];
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 3.5 + 1.5;
+
+          this.particles.push(new Particle(this.canvas, {
+            type: 'emoji',
+            char: char,
+            x: startX + (Math.random() - 0.5) * 40,
+            y: startY + (Math.random() - 0.5) * 40,
+            size: Math.random() * 18 + 22,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed - 1.5,
+            gravity: -0.015,
+            decay: Math.random() * 0.008 + 0.005,
+            rotationSpeed: (Math.random() - 0.5) * 0.05,
+            wobble: true,
+            opacity: 1
+          }));
+        }
+      }
+
+      triggerConfetti() {
+        if (this.reducedMotion) return;
+        const count = 120;
+        const colorSet = [...this.colors.pink, ...this.colors.purple, ...this.colors.gold];
+        
+        for (let i = 0; i < count; i++) {
+          this.particles.push(new Particle(this.canvas, {
+            type: 'confetti',
+            x: Math.random() * this.canvas.width,
+            y: -20 - Math.random() * 50,
+            size: Math.random() * 6 + 4,
+            vx: (Math.random() - 0.5) * 3.5,
+            vy: Math.random() * 2 + 1.8,
+            gravity: 0.05,
+            color: colorSet[Math.floor(Math.random() * colorSet.length)],
+            decay: 0,
+            rotationSpeed: (Math.random() - 0.5) * 0.1,
+            opacity: 1
+          }));
+        }
+      }
+
+      triggerHeartBurst(x, y) {
+        if (this.reducedMotion) return;
+        const count = 70;
+        const colorSet = [...this.colors.pink, '#ff1a5c', '#ffb6d5'];
+        
+        for (let i = 0; i < count; i++) {
+          const angle = Math.random() * Math.PI * 2;
+          const speed = Math.random() * 5 + 2;
+          this.particles.push(new Particle(this.canvas, {
+            type: 'heart',
+            x: x,
+            y: y,
+            size: Math.random() * 8 + 4,
+            vx: Math.cos(angle) * speed,
+            vy: Math.sin(angle) * speed,
+            gravity: 0.03,
+            color: colorSet[Math.floor(Math.random() * colorSet.length)],
+            decay: Math.random() * 0.01 + 0.005,
+            rotationSpeed: (Math.random() - 0.5) * 0.06,
+            opacity: 1
+          }));
+        }
+      }
+
+      spawnSparkle(x, y) {
+        if (this.reducedMotion) return;
+        if (Math.random() < 0.3) {
+          const colorSet = [...this.colors.pink, ...this.colors.gold, '#ffffff'];
+          this.particles.push(new Particle(this.canvas, {
+            type: 'star',
+            x: x + (Math.random() - 0.5) * 10,
+            y: y + (Math.random() - 0.5) * 10,
+            size: Math.random() * 2 + 1,
+            vx: (Math.random() - 0.5) * 0.4,
+            vy: (Math.random() - 0.5) * 0.4 - 0.2,
+            color: colorSet[Math.floor(Math.random() * colorSet.length)],
+            decay: Math.random() * 0.02 + 0.01,
+            opacity: 0.95
+          }));
+        }
+      }
+
+      spawnAmbientDrifters() {
+        if (this.reducedMotion) return;
+        if (this.ambientMode === 'petals') {
+          if (Math.random() < 0.08) {
+            this.particles.push(new Particle(this.canvas, {
+              type: 'petal',
+              x: Math.random() * this.canvas.width - 100,
+              y: -20,
+              size: Math.random() * 6 + 4,
+              vx: Math.random() * 0.8 + 0.2,
+              vy: Math.random() * 1 + 0.8,
+              wobble: true,
+              wobbleSpeed: Math.random() * 0.03 + 0.01,
+              color: '#ffb6d5',
+              opacity: 0.9,
+              decay: 0
+            }));
+          }
+        }
+      }
+
+      loop() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.particles = this.particles.filter(p => {
+          p.update();
+          p.draw();
+          
+          if (p.type === 'confetti' && p.y > this.canvas.height + 20) return false;
+          if (p.type === 'petal' && (p.y > this.canvas.height + 20 || p.x > this.canvas.width + 20)) return false;
+          if (p.type === 'heart' && p.y < -20 && p.vy < 0) return false;
+          if (p.type === 'emoji' && p.opacity <= 0.02) return false;
+          if (p.decay > 0 && p.opacity <= 0.01) return false;
+          
+          return true;
+        });
+
+        this.spawnAmbientDrifters();
+        requestAnimationFrame(() => this.loop());
+      }
+    }
+
+    /* ==================================================
+       4. BLUSH METER MANAGER
+       ================================================== */
+    class BlushMeter {
+      constructor() {
+        this.percent = 0;
+        this.inner = document.getElementById('blushBarInner');
+        this.text = document.getElementById('blushPercent');
+        this.toast = document.getElementById('toastBanner');
+        this.toastText = document.getElementById('toastText');
+        this.toastIcon = document.getElementById('toastIcon');
+        this.maxTriggered = false;
+      }
+
+      add(points, message = "Shivani is blushing! 💕", icon = "😳") {
+        this.percent = Math.min(100, this.percent + points);
+        this.inner.style.width = `${this.percent}%`;
+        this.text.textContent = `${this.percent}%`;
+        
+        this.showToast(message, icon);
+
+        if (this.percent >= 100 && !this.maxTriggered) {
+          this.maxTriggered = true;
+          this.triggerMaxBlush();
+        }
+      }
+
+      showToast(message, icon = "😳") {
+        this.toastText.textContent = message;
+        this.toastIcon.textContent = icon;
+        this.toast.classList.add('show');
+
+        if (this.toastTimeout) clearTimeout(this.toastTimeout);
+        this.toastTimeout = setTimeout(() => {
+          this.toast.classList.remove('show');
+        }, 2800);
+      }
+
+      triggerMaxBlush() {
+        setTimeout(() => {
+          this.showToast("100% MAXIMUM BLUSH ACHIEVED! 😳❤️ You are officially the cutest!", "🎉");
+        }, 500);
+      }
+    }
+
+    /* ==================================================
+       5. MAIN APPLICATION CONTROLLER
+       ================================================== */
+    document.addEventListener("DOMContentLoaded", () => {
+      // Set Configuration Text
+      document.getElementById('s1Tag').textContent = birthdayData.introText;
+      document.getElementById('s1Sub').textContent = birthdayData.introSubtext;
+      document.getElementById('bdayTitle').innerHTML = `Happy Birthday<br><span class="highlight-name">${birthdayData.revealName}</span> 🎂🎉`;
+      document.getElementById('s6Title').innerHTML = `Happy Birthday,<br>${birthdayData.finalName} ❤️`;
+      document.getElementById('s6Message').textContent = birthdayData.finalMessage;
+
+      // Initialize Engines
+      const canvas = document.getElementById('bg-canvas');
+      const pSystem = new ParticleSystem(canvas);
+      const synth = new HappyBirthdaySynth();
+      const blushMeter = new BlushMeter();
+
+      // Setup touch / mouse star trails
+      window.addEventListener('mousemove', (e) => pSystem.spawnSparkle(e.clientX, e.clientY));
+      window.addEventListener('touchmove', (e) => {
+        if (e.touches && e.touches[0]) {
+          pSystem.spawnSparkle(e.touches[0].clientX, e.touches[0].clientY);
+        }
+      }, { passive: true });
+
+      // Music Toggle Button
+      const musicBtn = document.getElementById('musicBtn');
+      const musicLabel = document.getElementById('musicLabel');
+      let isMusicPlaying = false;
+
+      musicBtn.addEventListener('click', () => {
+        if (isMusicPlaying) {
+          synth.stop();
+          musicBtn.classList.remove('playing');
+          musicLabel.textContent = "Music Paused 🎵";
+          isMusicPlaying = false;
+        } else {
+          synth.play();
+          musicBtn.classList.add('playing');
+          musicLabel.textContent = "Happy Birthday Tune 🎵";
+          isMusicPlaying = true;
+          blushMeter.add(10, "Happy Birthday Music Started! 🎵", "🎶");
+        }
+      });
+
+      // Split Landing Name into interactive letters
+      const titleEl = document.getElementById('s1Title');
+      const titleText = `Hey, ${birthdayData.landingName} ✨`;
+      titleEl.innerHTML = '';
+      [...titleText].forEach(char => {
+        const span = document.createElement('span');
+        span.className = 'hover-glow-letter';
+        if (char === ' ') {
+          span.innerHTML = '&nbsp;';
+        } else {
+          span.textContent = char;
+        }
+        span.addEventListener('click', (e) => {
+          pSystem.triggerHeartBurst(e.clientX, e.clientY);
+          pSystem.spawnBlushEmojis(e.clientX, e.clientY, 6);
+          synth.playChime();
+          blushMeter.add(5, "Tapped letter! 💕", "🌸");
+        });
+        titleEl.appendChild(span);
+      });
+
+      // Secret tag click handler
+      const secrets = [
+        "Yes, you! Shivani Jaiswal... tap the dancing buttons below! 😉",
+        "Did you know your smile lights up everything around you? 🌸✨",
+        "That smile is officially a health hazard... 🫣",
+        "Your eyes are absolutely spellbinding... 👀❤️",
+        "Keep interacting to make the Blush Meter hit 100%! 🔮"
+      ];
+      let secretIdx = 0;
+      
+      document.getElementById('s1Tag').addEventListener('click', (e) => {
+        const popup = document.getElementById('secretTagPopup');
+        popup.textContent = secrets[secretIdx];
+        popup.classList.add('show');
+        secretIdx = (secretIdx + 1) % secrets.length;
+        
+        pSystem.triggerHeartBurst(e.clientX, e.clientY);
+        pSystem.spawnBlushEmojis(e.clientX, e.clientY, 8);
+        synth.playChime();
+        blushMeter.add(10, "Secret unlocked! 🔮", "✨");
+        
+        setTimeout(() => popup.classList.remove('show'), 3200);
+      });
+
+      // ==================================================
+      // INITIAL DANCING & DODGING BUTTONS PLAYGROUND LOGIC
+      // ==================================================
+      const dodgeBtn = document.getElementById('dodgeBtn');
+      const blushBtn = document.getElementById('blushBtn');
+      const dancePartyBtn = document.getElementById('dancePartyBtn');
+      const speechBubble = document.getElementById('dodgeSpeechBubble');
+
+      let dodgeCount = 0;
+
+      // Runaway Dodging Button Mechanics
+      const dodgeHandler = (e) => {
+        dodgeCount++;
+        synth.playChime();
+
+        const rect = dodgeBtn.getBoundingClientRect();
+        const curX = e.clientX || (rect.left + rect.width / 2);
+        const curY = e.clientY || (rect.top + rect.height / 2);
+
+        pSystem.spawnBlushEmojis(curX, curY, 8);
+
+        if (dodgeCount < 4) {
+          const dx = (Math.random() > 0.5 ? -1 : 1) * (80 + Math.random() * 60);
+          const dy = (Math.random() > 0.5 ? -1 : 1) * (40 + Math.random() * 50);
+          const rot = (Math.random() - 0.5) * 30;
+
+          dodgeBtn.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
+
+          const quotes = [
+            "Too slow, Shivani! 🏃‍♀️💨",
+            "Almost had it! 😜",
+            "Make me blush first! 😳",
+            "Okay okay, you got me! 🙈💖"
+          ];
+          speechBubble.textContent = quotes[dodgeCount - 1] || quotes[0];
+          speechBubble.classList.add('show');
+
+          blushMeter.add(15, "Tried to catch the button! 😜", "🏃‍♀️");
+
+          setTimeout(() => speechBubble.classList.remove('show'), 2000);
+        } else {
+          dodgeBtn.style.transform = `none`;
+          dodgeBtn.innerHTML = `<span>You Caught Me! 💖</span>`;
+          dodgeBtn.classList.add('btn-bounce');
+          speechBubble.textContent = "Caught me! 💖";
+          speechBubble.classList.add('show');
+
+          blushMeter.add(30, "Caught the dancing button! 100% Blushed! 😳❤️", "🥰");
+          pSystem.triggerConfetti();
+
+          if (!isMusicPlaying) {
+            synth.play();
+            musicBtn.classList.add('playing');
+            isMusicPlaying = true;
+          }
+
+          setTimeout(() => {
+            scrollToScene(2);
+            speechBubble.classList.remove('show');
+          }, 1200);
+        }
+      };
+
+      dodgeBtn.addEventListener('mouseenter', dodgeHandler);
+      dodgeBtn.addEventListener('click', dodgeHandler);
+
+      // Make Shivani Blush Button Mechanics
+      blushBtn.addEventListener('click', (e) => {
+        blushBtn.classList.remove('btn-wiggle');
+        void blushBtn.offsetWidth;
+        blushBtn.classList.add('btn-wiggle');
+
+        synth.playChime();
+        pSystem.spawnBlushEmojis(e.clientX, e.clientY, 18);
+        pSystem.triggerHeartBurst(e.clientX, e.clientY);
+
+        blushMeter.add(25, "A fountain of blushing emojis! 😳💖", "🌸");
+      });
+
+      // Dance Party Mode Button Mechanics
+      dancePartyBtn.addEventListener('click', (e) => {
+        dancePartyBtn.classList.add('btn-spin-once');
+        setTimeout(() => dancePartyBtn.classList.remove('btn-spin-once'), 600);
+
+        synth.play();
+        musicBtn.classList.add('playing');
+        isMusicPlaying = true;
+
+        pSystem.triggerConfetti();
+        pSystem.spawnBlushEmojis(e.clientX, e.clientY, 20);
+
+        document.querySelectorAll('.btn').forEach(btn => {
+          btn.classList.add('btn-bounce');
+          setTimeout(() => btn.classList.remove('btn-bounce'), 2500);
+        });
+
+        blushMeter.add(30, "Dance Party Mode Activated! 💃🎶", "🎉");
+      });
+
+      // ==================================================
+      // SCENE 3: FLIP CARDS & TYPEWRITER LETTER LOGIC
+      // ==================================================
+      const flipCards = document.querySelectorAll('.flip-card');
+      flipCards.forEach(card => {
+        card.addEventListener('click', () => {
+          card.classList.toggle('flipped');
+          const rect = card.getBoundingClientRect();
+          const x = rect.left + rect.width / 2;
+          const y = rect.top + rect.height / 2;
+
+          synth.playChime();
+          pSystem.triggerHeartBurst(x, y);
+          pSystem.spawnBlushEmojis(x, y, 10);
+
+          blushMeter.add(15, "Flipped a secret blush card! 💌", "🥰");
+        });
+      });
+
+      // Typewriter sequence
+      let isMessageTyped = false;
+      let skipMessageTyping = false;
+      
+      const typeMessage = () => {
+        if (isMessageTyped) return;
+        isMessageTyped = true;
+        
+        const container = document.getElementById('typewriterText');
+        const text = birthdayData.birthdayMessage;
+        const button = document.getElementById('messageNextBtn');
+        const card = document.getElementById('scene3Card');
+        const speed = 18;
+        
+        let index = 0;
+        container.innerHTML = '';
+        
+        const skipHandler = () => {
+          skipMessageTyping = true;
+          card.removeEventListener('click', skipHandler);
+        };
+        card.addEventListener('click', skipHandler);
+        container.setAttribute('title', 'Tap card to show full letter');
+        
+        const type = () => {
+          if (skipMessageTyping) {
+            container.innerHTML = text.replace(/\n/g, '<br>');
+            button.classList.add('visible');
+            return;
+          }
+          if (index < text.length) {
+            if (text.charAt(index) === '\n') {
+              container.innerHTML += '<br>';
+            } else {
+              container.innerHTML += text.charAt(index);
+            }
+            index++;
+            setTimeout(type, speed);
+          } else {
+            button.classList.add('visible');
+            card.removeEventListener('click', skipHandler);
+          }
+        };
+        type();
+      };
+
+      // ==================================================
+      // SCENE 4: GALLERY TRACK POPULATION
+      // ==================================================
+      const galleryTrack = document.getElementById('galleryTrack');
+      const galleryDots = document.getElementById('galleryDots');
+      
+      birthdayData.photos.forEach((photo, idx) => {
+        const card = document.createElement('div');
+        card.className = `gallery-card`;
+        card.innerHTML = `
+          <div class="card-img-wrapper">
+            <img src="${photo.url}" alt="Memory ${idx+1}">
+          </div>
+          <div class="card-content">
+            <h3 class="card-caption">${photo.caption}</h3>
+            <p class="card-date">${photo.date}</p>
+          </div>
+        `;
+        galleryTrack.appendChild(card);
+
+        const dot = document.createElement('span');
+        dot.className = `gallery-dot ${idx === 0 ? 'active' : ''}`;
+        galleryDots.appendChild(dot);
+      });
+
+      // Gallery Scroll dot synchronization
+      const dots = galleryDots.querySelectorAll('.gallery-dot');
+      galleryTrack.addEventListener('scroll', () => {
+        const cardWidth = 280 + 20;
+        const currentIdx = Math.round(galleryTrack.scrollLeft / cardWidth);
+        dots.forEach((dot, dIdx) => {
+          dot.classList.toggle('active', dIdx === currentIdx);
+        });
+      });
+
+      // Hide Preloader
+      setTimeout(() => {
+        document.getElementById('preloader').classList.add('fade-out');
+      }, 1200);
+
+      // DOM Scroll Navigation
+      const scrollContainer = document.getElementById('scrollContainer');
+      const navDots = document.querySelectorAll('.nav-dot');
+
+      const scrollToScene = (index) => {
+        const targetScene = document.getElementById(`scene-${index}`);
+        if (targetScene) {
+          targetScene.scrollIntoView({ behavior: 'smooth' });
+        }
+      };
+
+      document.getElementById('revealMoreBtn').addEventListener('click', () => scrollToScene(3));
+      document.getElementById('messageNextBtn').addEventListener('click', () => scrollToScene(4));
+      document.getElementById('galleryNextBtn').addEventListener('click', () => scrollToScene(5));
+      document.getElementById('rewardNextBtn').addEventListener('click', () => scrollToScene(6));
+
+      navDots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => scrollToScene(idx + 1));
+      });
+
+      // Birthday reveal sequence
+      let isBirthdayRevealed = false;
+      const revealBirthday = () => {
+        if (isBirthdayRevealed) return;
+        isBirthdayRevealed = true;
+
+        const s1 = document.querySelector('.step-1');
+        const s2 = document.querySelector('.step-2');
+        const s3 = document.querySelector('.step-3');
+
+        s1.classList.add('visible');
+
+        setTimeout(() => {
+          s1.classList.remove('visible');
+          setTimeout(() => s2.classList.add('visible'), 700);
+        }, 2000);
+
+        setTimeout(() => {
+          s2.classList.remove('visible');
+          setTimeout(() => {
+            s3.classList.add('visible');
+            pSystem.triggerConfetti();
+            pSystem.spawnBlushEmojis(window.innerWidth / 2, window.innerHeight / 2, 25);
+            blushMeter.add(20, "Happy Birthday Shivani! 🎉🎂", "🥳");
+          }, 700);
+        }, 4500);
+      };
+
+      // Heart scene trigger
+      let isHeartTapped = false;
+      const heartWrapper = document.getElementById('heartWrapper');
+      
+      heartWrapper.addEventListener('click', (e) => {
+        if (isHeartTapped) return;
+        isHeartTapped = true;
+
+        const flash = document.getElementById('flash-overlay');
+        flash.style.opacity = '1';
+        setTimeout(() => flash.style.opacity = '0', 140);
+
+        pSystem.triggerHeartBurst(e.clientX, e.clientY);
+        pSystem.spawnBlushEmojis(e.clientX, e.clientY, 30);
+        synth.playChime();
+        
+        setTimeout(() => pSystem.triggerConfetti(), 300);
+
+        canvas.style.background = 'radial-gradient(circle, #3d1c4f 0%, #0b0712 100%)';
+        pSystem.setAmbientMode('petals');
+
+        document.getElementById('heartPrompt').style.display = 'none';
+        document.getElementById('heartRewardCard').classList.add('show');
+
+        blushMeter.add(30, "Heart tapped! Unlimited Love & Blushes! ❤️", "💖");
+      });
+
+      // Intersection Observer for scenes
+      const observerOptions = {
+        root: scrollContainer,
+        threshold: 0.5
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const sceneId = entry.target.id;
+            const sceneIndex = parseInt(sceneId.split('-')[1]);
+            
+            navDots.forEach((dot, dIdx) => {
+              dot.classList.toggle('active', dIdx === sceneIndex - 1);
+            });
+
+            const reveals = entry.target.querySelectorAll('.fade-reveal');
+            reveals.forEach(el => el.classList.add('active'));
+
+            if (sceneIndex === 2) {
+              revealBirthday();
+            } else if (sceneIndex === 3) {
+              setTimeout(typeMessage, 500);
+            } else if (sceneIndex === 6) {
+              pSystem.setAmbientMode('petals');
+              pSystem.triggerConfetti();
+              pSystem.spawnBlushEmojis(window.innerWidth / 2, window.innerHeight / 2, 20);
+            }
+          }
+        });
+      }, observerOptions);
+
+      document.querySelectorAll('.scene').forEach(scene => observer.observe(scene));
+    });
+  </script>
+</body>
+</html>
