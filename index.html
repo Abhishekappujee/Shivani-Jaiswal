@@ -70,6 +70,10 @@
       touch-action: manipulation;
     }
 
+    body.modal-open {
+      overflow: hidden !important;
+    }
+
     /* Background Canvas */
     #bg-canvas {
       position: fixed;
@@ -418,6 +422,13 @@
       box-shadow: 0 8px 25px rgba(255, 209, 102, 0.4);
     }
 
+    .btn-read-full {
+      background: linear-gradient(135deg, #ff4f81, #ffd166);
+      color: #0b0712;
+      font-weight: 800;
+      box-shadow: 0 8px 25px rgba(255, 79, 129, 0.4);
+    }
+
     /* Dancing Keyframes */
     .btn-wiggle {
       animation: wiggleDance 0.8s ease-in-out infinite alternate;
@@ -576,6 +587,11 @@
       box-sizing: border-box;
     }
 
+    /* Scene 3 specific height optimization */
+    #scene-3 {
+      overflow: hidden;
+    }
+
     /* Fade reveal animation */
     .fade-reveal {
       opacity: 0;
@@ -687,7 +703,7 @@
     .cards-grid-subtitle {
       font-size: 0.85rem;
       color: var(--color-accent-lavender);
-      margin-bottom: 1.2rem;
+      margin-bottom: 1rem;
     }
 
     .compliment-cards-container {
@@ -696,13 +712,13 @@
       gap: 14px;
       width: 100%;
       max-width: 780px;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     /* Flip Card 3D */
     .flip-card {
       background-color: transparent;
-      height: 140px;
+      height: 135px;
       perspective: 1000px;
       cursor: pointer;
       touch-action: manipulation;
@@ -779,44 +795,155 @@
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
       border-radius: 24px;
-      padding: 1.8rem 1.4rem;
+      padding: 1.5rem 1.4rem;
       box-shadow: var(--glass-shadow);
       width: 100%;
       max-width: 680px;
-      max-height: 55vh;
+      max-height: 38vh;
       overflow-y: auto;
       text-align: left;
       position: relative;
       -webkit-overflow-scrolling: touch;
+      display: flex;
+      flex-direction: column;
     }
 
     .message-title {
       font-family: var(--font-serif);
-      font-size: 1.45rem;
-      margin-bottom: 0.8rem;
+      font-size: 1.35rem;
+      margin-bottom: 0.6rem;
       color: var(--color-accent-soft);
       text-align: center;
     }
 
     .message-text {
-      font-size: 0.94rem;
-      line-height: 1.65;
+      font-size: 0.92rem;
+      line-height: 1.6;
       color: rgba(255, 255, 255, 0.92);
       font-weight: 400;
       white-space: pre-line;
+      margin-bottom: 0.8rem;
+    }
+
+    .message-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 0.5rem;
+      align-self: center;
     }
 
     .btn-message-next {
-      margin-top: 1.2rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s ease;
-      align-self: center;
     }
 
     .btn-message-next.visible {
       opacity: 1;
       pointer-events: auto;
+    }
+
+    /* ==================================================
+       FULL-SCREEN STORY MODAL POPUP
+       ================================================== */
+    .letter-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100svh;
+      background: rgba(11, 7, 18, 0.94);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      z-index: 10000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: calc(15px + var(--safe-top)) 14px calc(15px + var(--safe-bottom));
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1), visibility 0.4s;
+    }
+
+    .letter-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .letter-modal-content {
+      background: rgba(28, 11, 43, 0.88);
+      border: 1px solid var(--color-accent-pink);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(255, 79, 129, 0.3);
+      border-radius: 26px;
+      width: 100%;
+      max-width: 680px;
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transform: scale(0.92);
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      overflow: hidden;
+    }
+
+    .letter-modal-overlay.active .letter-modal-content {
+      transform: scale(1);
+    }
+
+    .letter-modal-header {
+      padding: 1.2rem 1.4rem 0.8rem;
+      border-bottom: 1px solid rgba(255, 79, 129, 0.25);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-title {
+      font-family: var(--font-serif);
+      font-size: clamp(1.15rem, 4vw, 1.5rem);
+      color: var(--color-accent-soft);
+      font-weight: 700;
+    }
+
+    .modal-close-btn {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .modal-close-btn:hover {
+      background: var(--color-accent-pink);
+      transform: scale(1.1);
+    }
+
+    .letter-modal-body {
+      padding: 1.4rem;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      font-size: 0.94rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.95);
+      white-space: pre-line;
+      text-align: left;
+    }
+
+    .letter-modal-footer {
+      padding: 0.8rem 1.4rem 1.2rem;
+      border-top: 1px solid rgba(255, 79, 129, 0.2);
+      display: flex;
+      justify-content: center;
     }
 
     /* Scene 4: Photo Gallery Carousel */
@@ -1082,7 +1209,6 @@
        COMPREHENSIVE MOBILE RESPONSIVE MEDIA QUERIES
        ================================================== */
     @media (max-width: 640px) {
-      /* Header bar optimization */
       .top-header-bar {
         padding: 0 10px;
         gap: 6px;
@@ -1117,14 +1243,12 @@
         gap: 2px;
       }
 
-      /* Navigation dots smaller offset on phones */
       .scene-nav {
         right: 8px;
         gap: 10px;
         transform: translateY(-50%) scale(0.85);
       }
 
-      /* Scene 1 Mobile Layout */
       .s1-title {
         font-size: clamp(1.7rem, 7.5vw, 2.6rem);
       }
@@ -1150,57 +1274,68 @@
         font-size: 0.88rem;
       }
 
-      /* Scene 3 Flip Cards 2x2 Grid on Mobile */
+      /* Scene 3 Mobile Layout: Prevent Overlap into Scene 4 */
+      .scene#scene-3 {
+        justify-content: flex-start;
+        padding-top: calc(55px + var(--safe-top));
+        padding-bottom: 20px;
+        min-height: 100svh;
+      }
+
       .compliment-cards-container {
         grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        margin-bottom: 1.2rem;
+        gap: 8px;
+        margin-bottom: 0.8rem;
       }
 
       .flip-card {
-        height: 135px;
+        height: 115px;
       }
 
       .flip-card-front, .flip-card-back {
-        padding: 10px 8px;
-        border-radius: 16px;
+        padding: 8px 6px;
+        border-radius: 14px;
       }
 
       .flip-card-front .card-icon {
-        font-size: 1.5rem;
+        font-size: 1.35rem;
         margin-bottom: 2px;
       }
 
       .flip-card-front .card-prompt {
-        font-size: 0.78rem;
+        font-size: 0.74rem;
       }
 
       .flip-card-front .card-tap-hint {
-        font-size: 0.68rem;
+        font-size: 0.64rem;
       }
 
       .flip-card-back {
-        font-size: 0.74rem;
-        line-height: 1.35;
+        font-size: 0.7rem;
+        line-height: 1.3;
       }
 
       .message-card {
-        padding: 1.2rem 1rem;
-        max-height: 52vh;
-        border-radius: 20px;
+        padding: 1rem 0.9rem;
+        max-height: 32vh;
+        border-radius: 18px;
       }
 
       .message-title {
-        font-size: 1.25rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.15rem;
+        margin-bottom: 0.4rem;
       }
 
       .message-text {
-        font-size: 0.88rem;
-        line-height: 1.6;
+        font-size: 0.84rem;
+        line-height: 1.5;
+        margin-bottom: 0.5rem;
       }
 
-      /* Scene 4 Photo Carousel Mobile */
+      .message-actions {
+        gap: 6px;
+      }
+
       .gallery-card {
         flex: 0 0 220px;
       }
@@ -1209,7 +1344,6 @@
         height: 240px;
       }
 
-      /* Scene 5 & 6 Mobile */
       .heart-wrapper {
         width: 100px;
         height: 100px;
@@ -1257,7 +1391,7 @@
         grid-template-columns: 1fr;
       }
       .flip-card {
-        height: 110px;
+        height: 100px;
       }
     }
 
@@ -1451,7 +1585,10 @@
         <div class="message-card" id="scene3Card">
           <h2 class="message-title">A Message for Shivani Jaiswal ✨</h2>
           <div class="message-text" id="typewriterText"></div>
-          <button class="btn btn-message-next" id="messageNextBtn">Keep going 💕</button>
+          <div class="message-actions">
+            <button class="btn btn-read-full" id="openFullMessageBtn">Read Story in Fullscreen 📜✨</button>
+            <button class="btn btn-message-next" id="messageNextBtn">Keep going 💕</button>
+          </div>
         </div>
       </div>
     </section>
@@ -1538,6 +1675,24 @@
     </section>
 
   </main>
+
+  <!-- ==================================================
+       FULL-SCREEN STORY MODAL POPUP
+       ================================================== -->
+  <div class="letter-modal-overlay" id="letterModalOverlay" role="dialog" aria-modal="true">
+    <div class="letter-modal-content">
+      <div class="letter-modal-header">
+        <h3 class="modal-title">Happy Birthday, Shivani 🥳🎂❤️</h3>
+        <button class="modal-close-btn" id="closeModalBtn" aria-label="Close message">✕</button>
+      </div>
+      <div class="letter-modal-body" id="modalMessageBody">
+        <!-- Full letter content rendered dynamically -->
+      </div>
+      <div class="letter-modal-footer">
+        <button class="btn" id="closeModalFooterBtn">Close & Continue 💕</button>
+      </div>
+    </div>
+  </div>
 
   <!-- ==================================================
        JAVASCRIPT LOGIC & ANIMATION CONTROLLER
@@ -2164,6 +2319,9 @@ Happy Birthday first. Questions later. 😂❤️`,
       document.getElementById('bdayTitle').innerHTML = `Happy Birthday<br><span class="highlight-name">${birthdayData.revealName}</span> 🎂🎉`;
       document.getElementById('s6Title').innerHTML = `Happy Birthday,<br>${birthdayData.finalName} ❤️`;
       document.getElementById('s6Message').textContent = birthdayData.finalMessage;
+      
+      // Render full modal message body
+      document.getElementById('modalMessageBody').textContent = birthdayData.birthdayMessage;
 
       // Initialize Engines
       const canvas = document.getElementById('bg-canvas');
@@ -2196,6 +2354,44 @@ Happy Birthday first. Questions later. 😂❤️`,
           musicLabel.textContent = "Happy Birthday Tune 🎵";
           isMusicPlaying = true;
           blushMeter.add(10, "Happy Birthday Music Started! 🎵", "🎶");
+        }
+      });
+
+      // Modal Fullscreen Story Popup Logic
+      const modalOverlay = document.getElementById('letterModalOverlay');
+      const openModalBtn = document.getElementById('openFullMessageBtn');
+      const closeModalBtn = document.getElementById('closeModalBtn');
+      const closeModalFooterBtn = document.getElementById('closeModalFooterBtn');
+
+      const openStoryModal = (e) => {
+        if (e) e.stopPropagation();
+        modalOverlay.classList.add('active');
+        document.body.classList.add('modal-open');
+        synth.playChime();
+        blushMeter.add(15, "Opened Full Birthday Story! 📜✨", "🥰");
+        
+        const rect = openModalBtn.getBoundingClientRect();
+        pSystem.spawnBlushEmojis(rect.left + rect.width / 2, rect.top, 15);
+      };
+
+      const closeStoryModal = () => {
+        modalOverlay.classList.remove('active');
+        document.body.classList.remove('modal-open');
+      };
+
+      openModalBtn.addEventListener('click', openStoryModal);
+      closeModalBtn.addEventListener('click', closeStoryModal);
+      closeModalFooterBtn.addEventListener('click', closeStoryModal);
+
+      modalOverlay.addEventListener('click', (e) => {
+        if (e.target === modalOverlay) {
+          closeStoryModal();
+        }
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          closeStoryModal();
         }
       });
 
@@ -2267,11 +2463,11 @@ Happy Birthday first. Questions later. 😂❤️`,
 
         if (dodgeCount < 4) {
           const isMobile = window.innerWidth < 640;
-          const maxDx = isMobile ? 40 : 80;
-          const maxDy = isMobile ? 30 : 50;
+          const maxDx = isMobile ? 35 : 80;
+          const maxDy = isMobile ? 25 : 50;
 
-          const dx = (Math.random() > 0.5 ? -1 : 1) * (30 + Math.random() * maxDx);
-          const dy = (Math.random() > 0.5 ? -1 : 1) * (20 + Math.random() * maxDy);
+          const dx = (Math.random() > 0.5 ? -1 : 1) * (25 + Math.random() * maxDx);
+          const dy = (Math.random() > 0.5 ? -1 : 1) * (15 + Math.random() * maxDy);
           const rot = (Math.random() - 0.5) * 20;
 
           dodgeBtn.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
@@ -2388,7 +2584,7 @@ Happy Birthday first. Questions later. 😂❤️`,
           card.removeEventListener('click', skipHandler);
         };
         card.addEventListener('click', skipHandler);
-        container.setAttribute('title', 'Tap card to show full letter');
+        container.setAttribute('title', 'Tap card to show full letter or use Fullscreen button');
         
         const type = () => {
           if (skipMessageTyping) {
