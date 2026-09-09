@@ -107,6 +107,7 @@
       z-index: 2;
       scrollbar-width: none;
       -ms-overflow-style: none;
+      -webkit-overflow-scrolling: touch;
     }
     
     .scroll-container::-webkit-scrollbar {
@@ -118,13 +119,13 @@
        ================================================== */
     .top-header-bar {
       position: fixed;
-      top: calc(12px + var(--safe-top));
+      top: calc(10px + var(--safe-top));
       left: 0;
       width: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 16px;
       z-index: 100;
       pointer-events: none;
     }
@@ -136,12 +137,12 @@
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 30px;
       box-shadow: var(--glass-shadow);
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       transition: all 0.4s ease;
     }
 
@@ -151,7 +152,7 @@
     }
 
     .blush-title {
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 700;
       color: var(--color-accent-soft);
       letter-spacing: 0.5px;
@@ -161,8 +162,8 @@
     }
 
     .blush-bar-outer {
-      width: 90px;
-      height: 10px;
+      width: 80px;
+      height: 8px;
       background: rgba(255, 255, 255, 0.12);
       border-radius: 10px;
       overflow: hidden;
@@ -180,10 +181,10 @@
     }
 
     .blush-percent {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       font-weight: 800;
       color: var(--color-accent-gold);
-      min-width: 38px;
+      min-width: 32px;
     }
 
     /* Audio Waves floating button */
@@ -195,8 +196,8 @@
     }
 
     .music-btn {
-      width: 46px;
-      height: 46px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
@@ -211,6 +212,7 @@
       transition: all 0.3s ease;
       outline: none;
       position: relative;
+      touch-action: manipulation;
     }
 
     .music-btn:hover {
@@ -223,7 +225,7 @@
       display: flex;
       align-items: flex-end;
       gap: 3px;
-      height: 16px;
+      height: 15px;
     }
 
     .music-waves span {
@@ -259,7 +261,7 @@
       backdrop-filter: blur(var(--glass-blur));
       display: none;
     }
-    @media (min-width: 600px) {
+    @media (min-width: 640px) {
       .music-label { display: block; }
     }
 
@@ -294,9 +296,9 @@
     }
 
     .preloader-text {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
       color: var(--color-accent-soft);
       animation: pulse 2s ease-in-out infinite;
       text-align: center;
@@ -318,13 +320,13 @@
        ================================================== */
     .scene-nav {
       position: fixed;
-      right: 20px;
+      right: 14px;
       top: 50%;
       transform: translateY(-50%);
       z-index: 100;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .nav-dot {
@@ -340,7 +342,7 @@
     .nav-dot.active {
       background: var(--color-accent-pink);
       border-color: var(--color-accent-pink);
-      transform: scale(1.5);
+      transform: scale(1.4);
       box-shadow: 0 0 12px var(--color-accent-pink-glow);
     }
 
@@ -353,9 +355,9 @@
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 0.9rem 2.2rem;
+      padding: 0.85rem 2rem;
       font-family: var(--font-sans);
-      font-size: 0.95rem;
+      font-size: 0.92rem;
       font-weight: 700;
       letter-spacing: 0.8px;
       color: var(--color-white);
@@ -369,10 +371,12 @@
       text-decoration: none;
       min-height: 48px;
       user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
     }
 
     .btn:hover {
-      transform: translateY(-3px) scale(1.03);
+      transform: translateY(-3px) scale(1.02);
       box-shadow: 0 14px 35px rgba(255, 79, 129, 0.5);
     }
 
@@ -386,10 +390,10 @@
       flex-wrap: wrap;
       justify-content: center;
       align-items: center;
-      gap: 16px;
-      margin-top: 2rem;
+      gap: 14px;
+      margin-top: 1.5rem;
       position: relative;
-      min-height: 140px;
+      min-height: 120px;
       width: 100%;
       max-width: 650px;
     }
@@ -435,12 +439,12 @@
 
     @keyframes bounceDance {
       0% { transform: translateY(0) scale(1); }
-      100% { transform: translateY(-12px) scale(1.06); }
+      100% { transform: translateY(-10px) scale(1.04); }
     }
 
     @keyframes spinDance {
       0% { transform: rotate(0deg) scale(1); }
-      50% { transform: rotate(180deg) scale(1.15); }
+      50% { transform: rotate(180deg) scale(1.12); }
       100% { transform: rotate(360deg) scale(1); }
     }
 
@@ -449,11 +453,11 @@
       position: absolute;
       background: linear-gradient(135deg, var(--color-accent-pink), var(--color-primary));
       color: white;
-      padding: 0.5rem 1rem;
+      padding: 0.45rem 0.9rem;
       border-radius: 14px;
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 700;
-      bottom: calc(100% + 12px);
+      bottom: calc(100% + 10px);
       left: 50%;
       transform: translateX(-50%) scale(0);
       transform-origin: bottom center;
@@ -483,16 +487,16 @@
     /* Toast Notification Banner */
     .toast-banner {
       position: fixed;
-      bottom: 30px;
+      bottom: 25px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: rgba(28, 11, 43, 0.9);
+      background: rgba(28, 11, 43, 0.92);
       border: 1px solid var(--color-accent-pink);
       color: #fff;
-      padding: 12px 24px;
+      padding: 10px 20px;
       border-radius: 30px;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       backdrop-filter: blur(15px);
       box-shadow: 0 10px 30px rgba(255, 79, 129, 0.4);
       z-index: 1000;
@@ -500,7 +504,9 @@
       pointer-events: none;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      max-width: 90%;
+      text-align: center;
     }
 
     .toast-banner.show {
@@ -512,22 +518,24 @@
       display: inline-block;
       cursor: pointer;
       transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.3s ease, text-shadow 0.3s ease;
+      touch-action: manipulation;
     }
-    .hover-glow-letter:hover {
-      transform: scale(1.3) translateY(-6px) rotate(6deg);
+    .hover-glow-letter:hover, .hover-glow-letter:active {
+      transform: scale(1.25) translateY(-5px) rotate(5deg);
       color: var(--color-accent-gold);
       text-shadow: 0 0 15px var(--color-accent-gold);
     }
 
     /* Secret interaction hints */
     .secrets-hint {
-      font-size: 0.85rem;
-      color: rgba(200, 182, 255, 0.6);
-      margin-top: 1.5rem;
+      font-size: 0.82rem;
+      color: rgba(200, 182, 255, 0.65);
+      margin-top: 1.2rem;
       font-style: italic;
       cursor: pointer;
       user-select: none;
       transition: color 0.3s ease, text-shadow 0.3s ease;
+      padding: 0 10px;
     }
     .secrets-hint:hover {
       color: var(--color-accent-soft);
@@ -535,14 +543,15 @@
     }
 
     .secret-popup-text {
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       font-weight: 600;
       color: var(--color-accent-gold);
-      min-height: 24px;
-      margin-top: 0.5rem;
+      min-height: 22px;
+      margin-top: 0.4rem;
       opacity: 0;
       transform: translateY(6px);
       transition: opacity 0.5s ease, transform 0.5s ease;
+      padding: 0 10px;
     }
     .secret-popup-text.show {
       opacity: 1;
@@ -554,13 +563,14 @@
        ================================================== */
     .scene {
       width: 100vw;
-      height: 100svh;
+      min-height: 100svh;
+      height: auto;
       scroll-snap-align: start;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      padding: calc(60px + var(--safe-top)) 20px calc(40px + var(--safe-bottom));
+      padding: calc(65px + var(--safe-top)) 16px calc(30px + var(--safe-bottom));
       position: relative;
       text-align: center;
       box-sizing: border-box;
@@ -585,31 +595,33 @@
 
     /* Scene 1 Typography */
     .s1-tag {
-      font-size: 0.95rem;
+      font-size: 0.88rem;
       letter-spacing: 2px;
       color: var(--color-accent-soft);
       text-transform: uppercase;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       font-weight: 600;
     }
 
     .s1-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.2rem, 6vw, 4.2rem);
+      font-size: clamp(2rem, 6vw, 4rem);
       font-weight: 800;
-      line-height: 1.15;
+      line-height: 1.18;
       background: linear-gradient(135deg, #ffffff 30%, var(--color-accent-soft) 70%, var(--color-accent-pink) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       margin-bottom: 0.8rem;
+      word-break: break-word;
     }
 
     .s1-sub {
-      font-size: clamp(1rem, 2.5vw, 1.25rem);
-      color: rgba(255, 255, 255, 0.8);
+      font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.82);
       max-width: 550px;
       font-weight: 300;
       margin-bottom: 1.2rem;
+      padding: 0 10px;
     }
 
     /* Scene 2 Reveal Step Styling */
@@ -617,7 +629,7 @@
       position: relative;
       width: 100%;
       max-width: 700px;
-      height: 300px;
+      min-height: 260px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -626,7 +638,7 @@
     .reveal-step {
       position: absolute;
       font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 5vw, 3.5rem);
+      font-size: clamp(1.6rem, 5vw, 3.2rem);
       font-weight: 700;
       text-align: center;
       opacity: 0;
@@ -634,6 +646,7 @@
       transition: all 1s cubic-bezier(0.25, 1, 0.5, 1);
       pointer-events: none;
       width: 100%;
+      padding: 0 10px;
     }
 
     .reveal-step.visible {
@@ -644,9 +657,9 @@
 
     .birthday-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 7vw, 4.5rem);
+      font-size: clamp(2.2rem, 6.5vw, 4.2rem);
       line-height: 1.2;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       color: #fff;
     }
 
@@ -655,7 +668,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-family: var(--font-cursive);
-      font-size: clamp(3.5rem, 10vw, 6.5rem);
+      font-size: clamp(3.2rem, 9vw, 6rem);
       display: block;
       margin-top: 0.2rem;
       filter: drop-shadow(0 0 20px var(--color-accent-pink-glow));
@@ -664,26 +677,26 @@
     /* Scene 3: Secret Compliment Cards Grid & Letter */
     .cards-grid-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 4vw, 2.5rem);
-      margin-bottom: 0.4rem;
+      font-size: clamp(1.5rem, 4vw, 2.4rem);
+      margin-bottom: 0.3rem;
       background: linear-gradient(135deg, #fff, var(--color-accent-soft));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .cards-grid-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--color-accent-lavender);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .compliment-cards-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 14px;
       width: 100%;
       max-width: 780px;
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
 
     /* Flip Card 3D */
@@ -692,6 +705,7 @@
       height: 140px;
       perspective: 1000px;
       cursor: pointer;
+      touch-action: manipulation;
     }
 
     .flip-card-inner {
@@ -716,7 +730,7 @@
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
       border-radius: 20px;
-      padding: 16px;
+      padding: 14px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -732,18 +746,18 @@
     }
 
     .flip-card-front .card-icon {
-      font-size: 2rem;
-      margin-bottom: 6px;
+      font-size: 1.8rem;
+      margin-bottom: 4px;
     }
 
     .flip-card-front .card-prompt {
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: var(--color-accent-soft);
     }
 
     .flip-card-front .card-tap-hint {
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       color: rgba(255, 255, 255, 0.5);
       margin-top: 4px;
     }
@@ -753,9 +767,9 @@
       color: white;
       transform: rotateY(180deg);
       border-color: var(--color-accent-gold);
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       font-weight: 600;
-      line-height: 1.4;
+      line-height: 1.38;
     }
 
     /* Typewriter Romantic Message Card */
@@ -764,35 +778,36 @@
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(var(--glass-blur));
       -webkit-backdrop-filter: blur(var(--glass-blur));
-      border-radius: 28px;
-      padding: 2.2rem;
+      border-radius: 24px;
+      padding: 1.8rem 1.4rem;
       box-shadow: var(--glass-shadow);
       width: 100%;
       max-width: 680px;
-      max-height: 60vh;
+      max-height: 55vh;
       overflow-y: auto;
       text-align: left;
       position: relative;
+      -webkit-overflow-scrolling: touch;
     }
 
     .message-title {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
-      margin-bottom: 1rem;
+      font-size: 1.45rem;
+      margin-bottom: 0.8rem;
       color: var(--color-accent-soft);
       text-align: center;
     }
 
     .message-text {
-      font-size: 0.98rem;
-      line-height: 1.7;
+      font-size: 0.94rem;
+      line-height: 1.65;
       color: rgba(255, 255, 255, 0.92);
       font-weight: 400;
       white-space: pre-line;
     }
 
     .btn-message-next {
-      margin-top: 1.5rem;
+      margin-top: 1.2rem;
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.5s ease;
@@ -815,7 +830,7 @@
 
     .gallery-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
       margin-bottom: 0.3rem;
       background: linear-gradient(135deg, #fff, var(--color-accent-soft));
       -webkit-background-clip: text;
@@ -823,24 +838,25 @@
     }
 
     .gallery-subtitle {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--color-accent-lavender);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     .gallery-track-wrapper {
       width: 100%;
       overflow: hidden;
-      padding: 10px 0 25px;
+      padding: 10px 0 20px;
     }
 
     .gallery-track {
       display: flex;
-      gap: 20px;
+      gap: 16px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
-      padding: 0 20px;
+      padding: 0 16px;
+      -webkit-overflow-scrolling: touch;
     }
 
     .gallery-track::-webkit-scrollbar {
@@ -848,25 +864,25 @@
     }
 
     .gallery-card {
-      flex: 0 0 280px;
+      flex: 0 0 260px;
       scroll-snap-align: center;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(var(--glass-blur));
-      border-radius: 24px;
+      border-radius: 22px;
       overflow: hidden;
       box-shadow: var(--glass-shadow);
       transition: transform 0.4s ease, border-color 0.4s ease;
     }
 
     .gallery-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-6px) scale(1.02);
       border-color: var(--color-accent-pink);
     }
 
     .card-img-wrapper {
       width: 100%;
-      height: 320px;
+      height: 280px;
       overflow: hidden;
       position: relative;
     }
@@ -878,31 +894,27 @@
       transition: transform 0.6s ease;
     }
 
-    .gallery-card:hover .card-img-wrapper img {
-      transform: scale(1.08);
-    }
-
     .card-content {
-      padding: 1rem;
+      padding: 0.9rem;
       text-align: center;
     }
 
     .card-caption {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       color: var(--color-white);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
 
     .card-date {
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--color-accent-soft);
     }
 
     .gallery-dots {
       display: flex;
       gap: 8px;
-      margin: 1rem 0;
+      margin: 0.8rem 0;
     }
 
     .gallery-dot {
@@ -915,28 +927,30 @@
 
     .gallery-dot.active {
       background: var(--color-accent-pink);
-      width: 24px;
+      width: 22px;
       border-radius: 10px;
     }
 
     /* Scene 5: Interactive Heart Moment */
     .heart-scene-title {
       font-family: var(--font-serif);
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      margin-bottom: 1.5rem;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      margin-bottom: 1.2rem;
       color: #fff;
+      padding: 0 10px;
     }
 
     .heart-wrapper {
       position: relative;
-      width: 140px;
-      height: 140px;
+      width: 130px;
+      height: 130px;
       display: flex;
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       user-select: none;
+      touch-action: manipulation;
     }
 
     .pulsing-glow {
@@ -955,27 +969,16 @@
     }
 
     .heart-svg {
-      width: 100px;
-      height: 100px;
+      width: 90px;
+      height: 90px;
       fill: url(#heartGradient);
       filter: drop-shadow(0 0 20px var(--color-accent-pink));
       animation: heartBeat 1.2s ease-in-out infinite;
       transition: transform 0.3s ease;
     }
 
-    .heart-wrapper:hover .heart-svg {
-      transform: scale(1.15);
-    }
-
-    @keyframes heartBeat {
-      0%, 100% { transform: scale(1); }
-      15% { transform: scale(1.18); }
-      30% { transform: scale(1); }
-      45% { transform: scale(1.12); }
-    }
-
     .heart-instruction {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--color-accent-soft);
       letter-spacing: 1px;
@@ -989,8 +992,8 @@
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       backdrop-filter: blur(var(--glass-blur));
-      border-radius: 28px;
-      padding: 2.2rem;
+      border-radius: 24px;
+      padding: 1.8rem 1.2rem;
       box-shadow: var(--glass-shadow);
       max-width: 550px;
       animation: rewardPop 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -1007,15 +1010,15 @@
 
     .reward-text-1 {
       font-family: var(--font-serif);
-      font-size: 1.6rem;
+      font-size: 1.45rem;
       color: #fff;
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
     }
 
     .reward-text-2 {
-      font-size: 1.05rem;
+      font-size: 0.98rem;
       color: var(--color-accent-soft);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
     }
 
     /* Scene 6: Final Grand Surprise */
@@ -1024,8 +1027,8 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 450px;
-      height: 450px;
+      width: 380px;
+      height: 380px;
       pointer-events: none;
       opacity: 0.25;
       animation: rotateMandala 60s linear infinite;
@@ -1043,35 +1046,219 @@
       position: relative;
       z-index: 10;
       max-width: 650px;
+      padding: 0 10px;
     }
 
     .s6-title {
       font-family: var(--font-serif);
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      margin-bottom: 1.2rem;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      margin-bottom: 1rem;
       color: #fff;
       line-height: 1.2;
     }
 
     .s6-message {
-      font-size: 1.15rem;
-      line-height: 1.8;
+      font-size: 1.05rem;
+      line-height: 1.7;
       color: rgba(255, 255, 255, 0.9);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.2rem;
       white-space: pre-line;
     }
 
     .s6-stay {
       font-family: var(--font-cursive);
-      font-size: 2.8rem;
+      font-size: 2.5rem;
       color: var(--color-accent-gold);
-      margin-bottom: 1.8rem;
+      margin-bottom: 1.5rem;
     }
 
     .s6-footer {
-      font-size: 0.85rem;
+      font-size: 0.82rem;
       color: rgba(255, 255, 255, 0.6);
       letter-spacing: 1px;
+    }
+
+    /* ==================================================
+       COMPREHENSIVE MOBILE RESPONSIVE MEDIA QUERIES
+       ================================================== */
+    @media (max-width: 640px) {
+      /* Header bar optimization */
+      .top-header-bar {
+        padding: 0 10px;
+        gap: 6px;
+      }
+      
+      .blush-meter-card {
+        padding: 5px 10px;
+        gap: 6px;
+      }
+
+      .blush-title {
+        font-size: 0.75rem;
+      }
+
+      .blush-bar-outer {
+        width: 55px;
+        height: 7px;
+      }
+
+      .blush-percent {
+        font-size: 0.72rem;
+        min-width: 28px;
+      }
+
+      .music-btn {
+        width: 38px;
+        height: 38px;
+      }
+
+      .music-waves {
+        height: 13px;
+        gap: 2px;
+      }
+
+      /* Navigation dots smaller offset on phones */
+      .scene-nav {
+        right: 8px;
+        gap: 10px;
+        transform: translateY(-50%) scale(0.85);
+      }
+
+      /* Scene 1 Mobile Layout */
+      .s1-title {
+        font-size: clamp(1.7rem, 7.5vw, 2.6rem);
+      }
+
+      .s1-sub {
+        font-size: 0.92rem;
+        line-height: 1.45;
+        margin-bottom: 1rem;
+      }
+
+      .dancing-arcade {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+        margin-top: 1.2rem;
+        min-height: auto;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 320px;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.88rem;
+      }
+
+      /* Scene 3 Flip Cards 2x2 Grid on Mobile */
+      .compliment-cards-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        margin-bottom: 1.2rem;
+      }
+
+      .flip-card {
+        height: 135px;
+      }
+
+      .flip-card-front, .flip-card-back {
+        padding: 10px 8px;
+        border-radius: 16px;
+      }
+
+      .flip-card-front .card-icon {
+        font-size: 1.5rem;
+        margin-bottom: 2px;
+      }
+
+      .flip-card-front .card-prompt {
+        font-size: 0.78rem;
+      }
+
+      .flip-card-front .card-tap-hint {
+        font-size: 0.68rem;
+      }
+
+      .flip-card-back {
+        font-size: 0.74rem;
+        line-height: 1.35;
+      }
+
+      .message-card {
+        padding: 1.2rem 1rem;
+        max-height: 52vh;
+        border-radius: 20px;
+      }
+
+      .message-title {
+        font-size: 1.25rem;
+        margin-bottom: 0.6rem;
+      }
+
+      .message-text {
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+
+      /* Scene 4 Photo Carousel Mobile */
+      .gallery-card {
+        flex: 0 0 220px;
+      }
+
+      .card-img-wrapper {
+        height: 240px;
+      }
+
+      /* Scene 5 & 6 Mobile */
+      .heart-wrapper {
+        width: 100px;
+        height: 100px;
+      }
+
+      .heart-svg {
+        width: 75px;
+        height: 75px;
+      }
+
+      .heart-reward-card {
+        padding: 1.4rem 1rem;
+        border-radius: 20px;
+      }
+
+      .reward-text-1 {
+        font-size: 1.25rem;
+      }
+
+      .reward-text-2 {
+        font-size: 0.9rem;
+      }
+
+      .s6-title {
+        font-size: clamp(1.8rem, 6.5vw, 3rem);
+      }
+
+      .s6-message {
+        font-size: 0.92rem;
+        line-height: 1.6;
+      }
+
+      .s6-stay {
+        font-size: 2.1rem;
+      }
+
+      .s6-mandala-container {
+        width: 300px;
+        height: 300px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .compliment-cards-container {
+        grid-template-columns: 1fr;
+      }
+      .flip-card {
+        height: 110px;
+      }
     }
 
     /* High contrast / reduced motion support */
@@ -1103,7 +1290,7 @@
     <!-- Shivani's Blush-O-Meter -->
     <div class="blush-meter-card" id="blushMeterCard" title="Interact with buttons & secret cards to fill the Blush Meter!">
       <div class="blush-title">
-        <span>Shivani's Blush Meter</span> 😳
+        <span>Blush Meter</span> 😳
       </div>
       <div class="blush-bar-outer">
         <div class="blush-bar-inner" id="blushBarInner"></div>
@@ -2067,7 +2254,7 @@ Happy Birthday first. Questions later. 😂❤️`,
 
       let dodgeCount = 0;
 
-      // Runaway Dodging Button Mechanics
+      // Runaway Dodging Button Mechanics (Bounded for Mobile & Desktop)
       const dodgeHandler = (e) => {
         dodgeCount++;
         synth.playChime();
@@ -2079,9 +2266,13 @@ Happy Birthday first. Questions later. 😂❤️`,
         pSystem.spawnBlushEmojis(curX, curY, 8);
 
         if (dodgeCount < 4) {
-          const dx = (Math.random() > 0.5 ? -1 : 1) * (80 + Math.random() * 60);
-          const dy = (Math.random() > 0.5 ? -1 : 1) * (40 + Math.random() * 50);
-          const rot = (Math.random() - 0.5) * 30;
+          const isMobile = window.innerWidth < 640;
+          const maxDx = isMobile ? 40 : 80;
+          const maxDy = isMobile ? 30 : 50;
+
+          const dx = (Math.random() > 0.5 ? -1 : 1) * (30 + Math.random() * maxDx);
+          const dy = (Math.random() > 0.5 ? -1 : 1) * (20 + Math.random() * maxDy);
+          const rot = (Math.random() - 0.5) * 20;
 
           dodgeBtn.style.transform = `translate(${dx}px, ${dy}px) rotate(${rot}deg)`;
 
@@ -2249,7 +2440,7 @@ Happy Birthday first. Questions later. 😂❤️`,
       // Gallery Scroll dot synchronization
       const dots = galleryDots.querySelectorAll('.gallery-dot');
       galleryTrack.addEventListener('scroll', () => {
-        const cardWidth = 280 + 20;
+        const cardWidth = 220 + 16;
         const currentIdx = Math.round(galleryTrack.scrollLeft / cardWidth);
         dots.forEach((dot, dIdx) => {
           dot.classList.toggle('active', dIdx === currentIdx);
